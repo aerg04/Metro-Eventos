@@ -1,5 +1,6 @@
 // import Navbar from "../components/navigation/Navbar";
-// import Footer from "../components/navigation/Footer";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import "../index.css";
 import { useState } from "react";
 
@@ -80,7 +81,8 @@ function Register() {
 
   return (
     <>
-      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full bg-white">
+      <Header></Header>
+      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full bg-gradient-circle lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
         </h2>
@@ -91,14 +93,14 @@ function Register() {
               onSubmit={funcCreate}
             >
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Nombre
                 </label>
                 <input
                   id="Fname"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.fname ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                   placeholder="Enter your first name"
                 />
                 {errors.fname && (
@@ -106,7 +108,7 @@ function Register() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Apellido
                 </label>
                 <input
@@ -114,21 +116,21 @@ function Register() {
                   placeholder="Enter your last name"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.lname ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                 />
                 {errors.lname && (
                   <p className="text-red-500 text-xs mt-1">{errors.lname}</p>
                 )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Teléfono
                 </label>
                 <input
                   id="phone"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.phone ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                   placeholder="Enter your phone number"
                 />
                 {errors.phone && (
@@ -136,7 +138,7 @@ function Register() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Correo
                 </label>
                 <input
@@ -144,7 +146,7 @@ function Register() {
                   id="email"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.email ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                   placeholder="Enter your email"
                 />
                 {errors.email && (
@@ -152,7 +154,7 @@ function Register() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Contraseña
                 </label>
                 <input
@@ -160,7 +162,7 @@ function Register() {
                   id="password"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.password ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                   placeholder="Enter password"
                 />
                 {errors.password && (
@@ -168,7 +170,7 @@ function Register() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-sm font-bold text-zinc-700">
                   Confirmar Contraseña
                 </label>
                 <input
@@ -176,7 +178,7 @@ function Register() {
                   id="checkpassword"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
                     errors.checkpassword ? "border-red-500" : "border-zinc-300"
-                  } dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white`}
+                  }`}
                   placeholder="Enter same password"
                 />
                 {errors.checkpassword && (
@@ -190,6 +192,7 @@ function Register() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }

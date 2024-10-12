@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Register from './pages/Register';
 
 
 function App() {
@@ -8,7 +8,13 @@ function App() {
 
   return (
     <>
-      <div className='h-10 bg-black'> hola</div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Navigate to='/register' />} />
+        <Route path='/home' element={<div>Home</div>} />
+        <Route path='/register' element={ <Register></Register>} />
+      </Routes>
+    </Router>
     </>
   )
 }

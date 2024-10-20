@@ -5,9 +5,9 @@ import Footer from "../components/Footer";
 function Login() {
   return (
     <>
-      <Header />
+
       <Mainlogin />
-      <Footer />
+
     </>
   );
 }

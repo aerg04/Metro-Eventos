@@ -5,3 +5,12 @@
 .bg-gradient-circle {
     background-image: linear-gradient(to right, #f4d06f, #fff8f0, #9dd9d2);
 }
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}

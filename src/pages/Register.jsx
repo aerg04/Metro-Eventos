@@ -81,7 +81,6 @@ function Register() {
 
   return (
     <>
-      <Header></Header>
       <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full bg-gradient-circle lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
@@ -192,7 +191,6 @@ function Register() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }

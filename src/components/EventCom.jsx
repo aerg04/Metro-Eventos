@@ -1,7 +1,7 @@
-export default function EventCom({title, path, date, place, author, entryType, onClose}) {
+export default function EventCom({id, title, path, date, place, author, entryType, handleClick}) {
     return (
         <>
-            <div className="bg-gray-50 w-64 m-2 h-[414px] rounded-xl">
+            <div onClick={() => handleClick(id)} className="bg-gray-50 w-64 m-2 h-[414px] rounded-xl cursor-pointer">
                 <div className="w-64 h-64">
                     <img className="w-full h-full object-cover rounded-t-lg" src={path} alt="" />
 

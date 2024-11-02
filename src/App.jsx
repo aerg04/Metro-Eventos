@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import MyEvents from './pages/MyEvents';
+import RegisterController from './controllers/RegisterController';
+import LoginController from './controllers/LoginController';
+import MyEventsController from './controllers/MyEventsController';
+import DetailEventController from './controllers/DetailEventController';
+import EventCreatorController from './controllers/EventCreatorController';
 import Layout from "./components/Layout"
 function App() {
   return (
@@ -12,9 +14,11 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Navigate to='/login' />} />
                     <Route path='/home' element={<div>Home</div>} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/myevents' element={<MyEvents />} />
+                    <Route path='/register' element={<RegisterController />} />
+                    <Route path='/login' element={<LoginController />} />
+                    <Route path='/myevents' element={<MyEventsController />} />
+                    <Route path="/event/:id" element={<DetailEventController />} /> 
+                    <Route path="/createevent" element={<EventCreatorController />} /> 
                 </Routes>
             </Layout>
         </Router>

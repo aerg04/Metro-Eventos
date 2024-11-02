@@ -1,10 +1,7 @@
-// import Navbar from "../components/navigation/Navbar";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import "../index.css";
 import { useState } from "react";
 
-function Register() {
+function Register({onSubmit}) {
   const [errors, setErrors] = useState({});
 
   const funcCreate = async (e) => {
@@ -35,10 +32,6 @@ function Register() {
 
     if (!email || !emailRegex.test(email)) {
       newErrors.email = "Correo electrónico debe ser @correo.unimet.edu.ve";
-    }
-
-    if (!phone || !phoneRegex.test(phone)) {
-      newErrors.phone = "Número de teléfono inválido o vacío";
     }
 
     if (!password) {
@@ -81,7 +74,7 @@ function Register() {
 
   return (
     <>
-      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full bg-gradient-circle lg:p-4">
+      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
         </h2>
@@ -121,21 +114,7 @@ function Register() {
                   <p className="text-red-500 text-xs mt-1">{errors.lname}</p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-bold text-zinc-700">
-                  Teléfono
-                </label>
-                <input
-                  id="phone"
-                  className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.phone ? "border-red-500" : "border-zinc-300"
-                  }`}
-                  placeholder="Enter your phone number"
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                )}
-              </div>
+              
               <div>
                 <label className="block text-sm font-bold text-zinc-700">
                   Correo

@@ -1,12 +1,14 @@
 const events = [
     {
         key: 1,
-        title: "Music Concert gggggggggggg gggggggggggggg gggggggggggggggggggg",
+        title: "Music Concert gggggggggggg gggggggggggggg",
         path: "https://24ai.tech/en/wp-content/uploads/sites/3/2023/10/01_product_1_sdelat-izobrazhenie-1-1-5-scaled.jpg",
         date: "2023-10-01",
         place: "City Hall",
         author: "John Doe",
-        entryType: "Paid"
+        entryType: "Paid",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget metus auctor",
+        link_compra: "https://www.google.com"
     },
     {
         key: 2,

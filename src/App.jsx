@@ -5,6 +5,7 @@ import LoginController from './controllers/LoginController';
 import MyEventsController from './controllers/MyEventsController';
 import DetailEventController from './controllers/DetailEventController';
 import EventCreatorController from './controllers/EventCreatorController';
+import EventsController from './controllers/SearchEventsController';
 import Layout from "./components/Layout"
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path='/login' element={<LoginController />} />
                     <Route path='/myevents' element={<MyEventsController />} />
                     <Route path="/event/:id" element={<DetailEventController />} /> 
+                    <Route path="/events" element={<EventsController />} /> 
                     <Route path="/createevent" element={<EventCreatorController />} /> 
                 </Routes>
             </Layout>

@@ -23,7 +23,7 @@ function EventCreator({handleSubmit}){
         const requiredFields = ['title', 'path', 'date', 'place', 'author', 'entryType', 'description'];
         for (const field of requiredFields) {
             if (!formData[field]) {
-                setErrorMessage(`Campo "${field}" no puede estar vacío.`);
+                setErrorMessage(`The field "${field}" no `);
                 setShowError(true);
                 return;
             }

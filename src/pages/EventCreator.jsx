@@ -10,17 +10,20 @@ function EventCreator({handleSubmit}){
         place: '',
         author: '',
         entryType: '',
-        description: ''
+        description: '',
+        labels: [] 
     });
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const labelsArray = ["Educación", "Deporte", "Recreación"]; // Add more labels as needed
 
     function handlePetition(){
         // Validate formData
         const requiredFields = ['title', 'path', 'date', 'place', 'author', 'entryType', 'description'];
         for (const field of requiredFields) {
             if (!formData[field]) {
-                setErrorMessage(`The field "${field}" cannot be empty.`);
+                setErrorMessage(`Campo "${field}" no puede estar vacío.`);
                 setShowError(true);
                 return;
             }
@@ -30,9 +33,15 @@ function EventCreator({handleSubmit}){
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (!name || !value) {
-            return;
+        const { name, value, options, type, checked } = e.target;
+        if (name === 'labels') {
+            const updatedLabels = checked
+                ? [...formData.labels, value]
+                : formData.labels.filter(label => label !== value);
+            setFormData({
+                ...formData,
+                labels: updatedLabels
+            });
         } else {
             setFormData({
                 ...formData,
@@ -40,6 +49,7 @@ function EventCreator({handleSubmit}){
             });
         }
     };
+
     function handleCloseError(){
         setShowError(false);
         setErrorMessage('');
@@ -64,6 +74,11 @@ function EventCreator({handleSubmit}){
 
     const handleAddAdditionalInfo = () => {
         if (newKey && newValue) {
+            if (formData.hasOwnProperty(newKey)) {
+                setErrorMessage(`The key "${newKey}" already exists.`);
+                setShowError(true);
+                return;
+            }
             setFormData({
                 ...formData,
                 [newKey]: newValue
@@ -153,7 +168,7 @@ function EventCreator({handleSubmit}){
                     <h2 className="text-center text-lg font-semibold">Información Adicional</h2>
                     <div className="mt-2 bg-gray-100 p-2 rounded">
                     {Object.entries(formData).map(([key, value]) => (
-                        key !== 'title' && key !== 'path' && key !== 'date' && key !== 'place' && key !== 'author' && key !== 'entryType' && key !== 'description' && (
+                        key !== 'title' && key !== 'path' && key !== 'date' && key !== 'place' && key !== 'author' && key !== 'entryType' && key !== 'labels' && key !== 'description' && (
                             <div key={key} className="mt-2">
                                     <label className="block text-sm font-medium text-gray-700">{key}</label>
                                     {typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://')) ? (
@@ -201,6 +216,24 @@ function EventCreator({handleSubmit}){
                                 Añadir campos
                             </button>
                         </div>  
+                    </div>
+                </div>
+                <div className='mt-4'>
+                    <h2 className="text-center text-lg font-semibold">Etiquetas</h2>
+                    <div className="mt-2 bg-gray-100 p-2 rounded">
+                        {labelsArray.map(label => (
+                            <label key={label} className="block text-sm font-medium text-gray-700">
+                                <input
+                                    type="checkbox"
+                                    name="labels"
+                                    value={label}
+                                    checked={formData.labels.includes(label)}
+                                    onChange={handleChange}
+                                    className="mr-2"
+                                />
+                                {label}
+                            </label>
+                        ))}
                     </div>
                 </div>
             </div>

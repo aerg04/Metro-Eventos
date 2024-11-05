@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
         const token = localStorage.getItem('token');
         
         // If the token exists, add it to the Authorization header
-        if (token) {
+        if (token && !config.url.includes('/auth/signup') && !config.url.includes('/auth/login')) {
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;

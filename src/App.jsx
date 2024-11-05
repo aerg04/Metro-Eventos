@@ -7,20 +7,22 @@ import DetailEventController from './controllers/DetailEventController';
 import EventCreatorController from './controllers/EventCreatorController';
 import EventsController from './controllers/SearchEventsController';
 import Layout from "./components/Layout"
+import PrivateRoute from './components/PrivateRoute';
+
 function App() {
   return (
     <>
       <Router>
             <Layout>
                 <Routes>
-                    <Route path='/' element={<Navigate to='/login' />} />
-                    <Route path='/home' element={<div>Home</div>} />
-                    <Route path='/register' element={<RegisterController />} />
-                    <Route path='/login' element={<LoginController />} />
-                    <Route path='/myevents' element={<MyEventsController />} />
-                    <Route path="/event/:id" element={<DetailEventController />} /> 
-                    <Route path="/events" element={<EventsController />} /> 
-                    <Route path="/createevent" element={<EventCreatorController />} /> 
+                <Route path='/' element={<Navigate to='/login' />} />
+            <Route path='/home' element={<div>Home</div>} />
+            <Route path='/register' element={<RegisterController />} />
+            <Route path='/login' element={<LoginController />} />
+            <Route path='/myevents' element={<PrivateRoute><MyEventsController /></PrivateRoute>} />
+            <Route path="/event/:id" element={<PrivateRoute><DetailEventController /></PrivateRoute>} />
+            <Route path="/events" element={<PrivateRoute><EventsController /></PrivateRoute>} />
+            <Route path="/createevent" element={<PrivateRoute><EventCreatorController /></PrivateRoute>} />
                 </Routes>
             </Layout>
         </Router>

@@ -8,7 +8,7 @@ function Register({onSubmit}) {
     e.preventDefault();
 
     const role = "usuario";
-    const fname = e.target.Fname.value.trim();
+    const name = e.target.Fname.value.trim();
     const lastName = e.target.Lname.value.trim();
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
@@ -21,8 +21,8 @@ function Register({onSubmit}) {
     // const phoneRegex = /^[0-9]+$/;
 
     // Validaciones de campos
-    if (!fname || !nameRegex.test(fname)) {
-      newErrors.fname = "Nombre inválido o vacío";
+    if (!name || !nameRegex.test(name)) {
+      newErrors.name = "Nombre inválido o vacío";
     }
 
     if (!lastName || !nameRegex.test(lastName)) {
@@ -47,7 +47,7 @@ function Register({onSubmit}) {
     }
     //si todo esta bien procede con onSubmit
     try {
-      await onSubmit({role, fname, lastName, email, password});
+      await onSubmit({role, name, lastName, email, password});
     } catch (error) {
       console.error("Error", error);
     }
@@ -72,12 +72,12 @@ function Register({onSubmit}) {
                 <input
                   id="Fname"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.fname ? "border-red-500" : "border-zinc-300"
+                    errors.name ? "border-red-500" : "border-zinc-300"
                   }`}
                   placeholder="Enter your first name"
                 />
-                {errors.fname && (
-                  <p className="text-red-500 text-xs mt-1">{errors.fname}</p>
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                 )}
               </div>
               <div>

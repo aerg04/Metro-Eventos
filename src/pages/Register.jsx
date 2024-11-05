@@ -7,7 +7,7 @@ function Register({onSubmit}) {
   const funcCreate = async (e) => {
     e.preventDefault();
 
-    const rol = "Cliente";
+    const rol = "usuario";
     const fname = e.target.Fname.value.trim();
     const lname = e.target.Lname.value.trim();
     const phone = e.target.phone.value.trim();
@@ -19,7 +19,7 @@ function Register({onSubmit}) {
 
     const nameRegex = /^[A-Za-z]+$/;
     const emailRegex = /^[^\s@]+@correo\.unimet\.edu\.ve$/; // Solo acepta correos de la unimet
-    const phoneRegex = /^[0-9]+$/;
+    // const phoneRegex = /^[0-9]+$/;
 
     // Validaciones de campos
     if (!fname || !nameRegex.test(fname)) {
@@ -46,31 +46,13 @@ function Register({onSubmit}) {
       setErrors(newErrors);
       return;
     }
-
-    // Si no hay errores, procede a crear el usuario
-  //   try {
-  //     const infoUsuario = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     ).then((usuarioFirebase) => {
-  //       return usuarioFirebase;
-  //     });
-  //     const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-  //     setDoc(docuRef, {
-  //       email: email,
-  //       rol: rol,
-  //       fname: fname,
-  //       lname: lname,
-  //       phone: phone,
-  //     });
-  //     console.log(infoUsuario);
-  //   } catch (error) {
-  //     alert("Este Correo ya se encuentra registrado");
-  //   }
-
-
-    };
+    //si todo esta bien procede con onSubmit
+    try {
+      await onSubmit({rol, fname, lname, email, password});
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   return (
     <>

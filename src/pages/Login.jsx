@@ -1,19 +1,8 @@
 import { Link } from "react-router-dom";
 
 
-function Login() {
+function Login(funcAutentication, email, setEmail, password, setPassword) {
 
-  const funcAutentication = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    // try {
-       const user = await signInWithEmailAndPassword(auth, email, password);
-    //   console.log("Usuario autenticado:", user);
-    // } catch (error) {
-    //   alert("Error al iniciar sesión, credenciales invalidas");
-    // }
-  };
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center font-montserrat">
@@ -34,6 +23,7 @@ function Login() {
                 id="email"
                 placeholder="Ingresa tu correo electrónico"
                 className="mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white"
+                value={email} onChange={(e) => setEmail(e.target.value)} required
               />
             </div>
             <div>
@@ -48,6 +38,7 @@ function Login() {
                 id="password"
                 placeholder="Ingresa tu contraseña"
                 className="mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white"
+                value={password} onChange={(e) => setPassword(e.target.value)} required
               />
             </div>
             <button

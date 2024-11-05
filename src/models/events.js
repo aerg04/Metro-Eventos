@@ -14,13 +14,18 @@ export async function getEvents() {
 
 // Function to convert an image file to a base64 string
 function convertImageToBase64(file) {
+    const isBase64 = (str) => typeof str === 'string' && /^data:\w+\/[a-zA-Z+\-\.]+;base64,/.test(str);
+    if (isBase64(file)) {
+        return file;
+    }
+    
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            resolve(reader.result);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
     });
 }
 
@@ -31,6 +36,9 @@ export async function addEvent(newEvent) {
             const base64Image = await convertImageToBase64(newEvent.path);
             newEvent.path = base64Image;
         }
+        
+        const token = localStorage.getItem("token");
+
         // Send the new event data to the endpoint
         const response = await axiosInstance.post('/events', newEvent);
         const savedEvent = response.data;

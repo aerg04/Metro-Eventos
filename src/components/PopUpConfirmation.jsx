@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PopUpConfirmation = ({ messageButton, message, onConfirm, onCancel }) => {
+const PopUpConfirmation = ({ messageButton, message, onConfirm = () => {}, onCancel = () => {}}) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleConfirm = () => {

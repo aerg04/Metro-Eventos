@@ -7,9 +7,9 @@ function Register({onSubmit}) {
   const funcCreate = async (e) => {
     e.preventDefault();
 
-    const rol = "usuario";
+    const role = "usuario";
     const fname = e.target.Fname.value.trim();
-    const lname = e.target.Lname.value.trim();
+    const lastName = e.target.Lname.value.trim();
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
     const checkpassword = e.target.checkpassword.value.trim();
@@ -25,8 +25,8 @@ function Register({onSubmit}) {
       newErrors.fname = "Nombre inválido o vacío";
     }
 
-    if (!lname || !nameRegex.test(lname)) {
-      newErrors.lname = "Apellido inválido o vacío";
+    if (!lastName || !nameRegex.test(lastName)) {
+      newErrors.lastName = "Apellido inválido o vacío";
     }
 
     if (!email) {
@@ -47,7 +47,7 @@ function Register({onSubmit}) {
     }
     //si todo esta bien procede con onSubmit
     try {
-      await onSubmit({rol, fname, lname, email, password});
+      await onSubmit({role, fname, lastName, email, password});
     } catch (error) {
       console.error("Error", error);
     }
@@ -55,7 +55,7 @@ function Register({onSubmit}) {
 
   return (
     <>
-      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
+      <div className="flex min-h-screen place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
         </h2>
@@ -88,11 +88,11 @@ function Register({onSubmit}) {
                   id="Lname"
                   placeholder="Enter your last name"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.lname ? "border-red-500" : "border-zinc-300"
+                    errors.lastName ? "border-red-500" : "border-zinc-300"
                   }`}
                 />
-                {errors.lname && (
-                  <p className="text-red-500 text-xs mt-1">{errors.lname}</p>
+                {errors.lastName && (
+                  <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
                 )}
               </div>
               

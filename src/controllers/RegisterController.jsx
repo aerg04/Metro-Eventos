@@ -23,6 +23,10 @@ function RegisterController(){
             setShowError(true);
         }
     }
+    function handleCloseError() {
+        setShowError(false);
+
+    }
 
     return (<>
         <Register onSubmit={handleRegister}/>

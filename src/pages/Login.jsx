@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 
 
-function Login(funcAutentication, email, setEmail, password, setPassword) {
+function Login({funcAutentication}) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
+    funcAutentication(email, password);
+  }
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center font-montserrat">
@@ -10,7 +16,7 @@ function Login(funcAutentication, email, setEmail, password, setPassword) {
           <h1 className="text-2xl text-teal-600 mb-6">
             INICIAR SESIÓN
           </h1>
-          <form className="w-full space-y-4" onSubmit={funcAutentication}>
+          <form className="w-full space-y-4" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -23,7 +29,8 @@ function Login(funcAutentication, email, setEmail, password, setPassword) {
                 id="email"
                 placeholder="Ingresa tu correo electrónico"
                 className="mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white"
-                value={email} onChange={(e) => setEmail(e.target.value)} required
+
+                required
               />
             </div>
             <div>
@@ -38,7 +45,8 @@ function Login(funcAutentication, email, setEmail, password, setPassword) {
                 id="password"
                 placeholder="Ingresa tu contraseña"
                 className="mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white"
-                value={password} onChange={(e) => setPassword(e.target.value)} required
+                
+                required
               />
             </div>
             <button

@@ -10,7 +10,6 @@ function Register({onSubmit}) {
     const rol = "usuario";
     const fname = e.target.Fname.value.trim();
     const lname = e.target.Lname.value.trim();
-    const phone = e.target.phone.value.trim();
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
     const checkpassword = e.target.checkpassword.value.trim();
@@ -18,7 +17,7 @@ function Register({onSubmit}) {
     const newErrors = {};
 
     const nameRegex = /^[A-Za-z]+$/;
-    const emailRegex = /^[^\s@]+@correo\.unimet\.edu\.ve$/; // Solo acepta correos de la unimet
+    // const emailRegex = /^[^\s@]+@correo\.unimet\.edu\.ve$/; // Solo acepta correos de la unimet
     // const phoneRegex = /^[0-9]+$/;
 
     // Validaciones de campos
@@ -30,8 +29,8 @@ function Register({onSubmit}) {
       newErrors.lname = "Apellido inválido o vacío";
     }
 
-    if (!email || !emailRegex.test(email)) {
-      newErrors.email = "Correo electrónico debe ser @correo.unimet.edu.ve";
+    if (!email) {
+      newErrors.email = "Correo electrónico invalido";
     }
 
     if (!password) {

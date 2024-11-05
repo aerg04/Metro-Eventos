@@ -5,13 +5,12 @@ import { login } from "../models/user";
 import PopUpMessage from "../components/PopUpMessage";
 
 export default function LoginController(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (email, password) => {
+    async function handleLogin(email, password){
         try {
             await login(email, password);
             navigate('/myevents');
@@ -20,13 +19,13 @@ export default function LoginController(){
             setShowError(true);
         }
     };
+    function handleCloseError() {
+        setShowError(false);
+
+    }
     return (<>
     <Login
-    email={email}
-    setEmail={setEmail}
-    password={password}
-    setPassword={setPassword}
-    funcAutentication={handleLogin}
+        funcAutentication={handleLogin}
     />
         {showError && (
             <PopUpMessage

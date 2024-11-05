@@ -1,7 +1,7 @@
 // RegisterController.jsx
 import React from 'react';
 import Register from '../pages/Register';
-import { register } from '../models/users';
+import { register } from '../models/user';
 import { useState } from 'react';
 import PopUpMessage from '../components/PopUpMessage';
 import { useNavigate } from 'react-router-dom';

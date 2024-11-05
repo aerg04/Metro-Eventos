@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 function Login() {
 
   const funcAutentication = async (e) => {
@@ -7,7 +8,7 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     // try {
-    //   const user = await signInWithEmailAndPassword(auth, email, password);
+       const user = await signInWithEmailAndPassword(auth, email, password);
     //   console.log("Usuario autenticado:", user);
     // } catch (error) {
     //   alert("Error al iniciar sesión, credenciales invalidas");

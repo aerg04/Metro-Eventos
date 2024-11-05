@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import MyEvents from "../pages/MyEvents";
 // import evnts from "../assets/events.js";
 import { useNavigate } from "react-router-dom";
 import { getEvents } from "../models/events";

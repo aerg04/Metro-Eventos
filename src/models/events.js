@@ -3,13 +3,13 @@ import axiosInstance from "../axiosConfig.js";
 
 // Function to fetch all events from the endpoint
 export async function getEvents() {
-    // try {
-    //     const response = await axiosInstance.get('/events?page=1&size=20');
-    //     const fetchedEvents = response.data;
-    //     return fetchedEvents;
-    // } catch (error) {
-    //     console.error("Failed to fetch events:", error);
-    // }
+    try {
+        const response = await axiosInstance.get('/events?page=1&size=20');
+        const fetchedEvents = response.data;
+        return fetchedEvents;
+    } catch (error) {
+        console.error("Failed to fetch events:", error);
+    }
     return events;
 }
 

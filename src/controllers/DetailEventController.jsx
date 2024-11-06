@@ -9,10 +9,11 @@ export default function DetailEventController() {
     const [event, setEvent] = useState(null);
 
     useEffect(() => {
-        const fetchedEvents = getEvents();
-        setEvents(fetchedEvents);
-        const foundEvent = fetchedEvents.find(event => event.key === parseInt(id));
-        setEvent(foundEvent);
+        getEvents().then(fetchedEvents => {
+            setEvents(fetchedEvents);
+            const foundEvent = fetchedEvents.find(event => event.key === parseInt(id));
+            setEvent(foundEvent);
+        });
     }, [id]);
 
     if (!event) {

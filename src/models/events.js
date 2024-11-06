@@ -10,7 +10,7 @@ export async function getEvents() {
     } catch (error) {
         console.error("Failed to fetch events:", error);
     }
-    return events;
+    // return events;
 }
 
 // Function to convert an image file to a base64 string

@@ -7,7 +7,7 @@ function Register({onSubmit}) {
   const funcCreate = async (e) => {
     e.preventDefault();
 
-    const role = "usuario";
+    const role = "ROLE_REGULAR"; //Queda pendiente que pueda ser ROLE_REGULAR o ROLE_ADMIN, y eso diferencia al que puede crear eventos y al queno
     const name = e.target.Fname.value.trim();
     const lastName = e.target.Lname.value.trim();
     const email = e.target.email.value.trim();

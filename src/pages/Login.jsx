@@ -12,7 +12,7 @@ function Login({funcAutentication}) {
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center font-montserrat">
-        <main className="flex flex-col items-center w-full max-w-md p-4">
+        <main className="flex flex-col items-center w-full max-w-md p-4 border border-orange-500 rounded-lg">
           <h1 className="text-2xl text-teal-600 mb-6">
             INICIAR SESIÓN
           </h1>

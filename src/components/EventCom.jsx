@@ -1,7 +1,7 @@
 export default function EventCom({id, title, path, date, place, author, entryType, handleClick}) {
     return (
         <>
-            <div onClick={() => handleClick(id)} className="bg-gray-50 w-64 m-2 h-[414px] rounded-xl cursor-pointer">
+            <div onClick={() => handleClick(id)} className="bg-gray-100 w-64 m-2 h-[414px] rounded-xl cursor-pointer">
                 <div className="w-64 h-64">
                     <img className="w-full h-full object-cover rounded-t-lg" src={path} alt="" />
 
@@ -10,7 +10,7 @@ export default function EventCom({id, title, path, date, place, author, entryTyp
                     <p className="px-4 pt-1 font-bold text-md line-clamp-2">{title}</p>
                     
                 </div>
-                <div className="flex justify-center items-start gap-y-1 px-3 pb-2  flex-col text-xs rounded-b-lg">
+                <div className="flex justify-center items-start gap-y-1 px-3 pb-2  flex-col text-sm rounded-b-lg">
                    
                     <div className="flex items-center text-left gap-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

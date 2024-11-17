@@ -74,7 +74,7 @@ function Register({onSubmit}) {
 
   return (
     <>
-      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
+      <div className="min-h-screen flex place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
         </h2>

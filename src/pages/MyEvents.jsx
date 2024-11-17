@@ -12,7 +12,7 @@ export default function MyEvents({onClick,events}) {
     </div>
     <h1 className="font-bold text-2xl">Mis eventos</h1>
     </div>
-    <div className="min-h-screen p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,0fr))]">
+    <div className="min-h-screen p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
         {events.map((event, index) => (
             <EventCom
                 key={index}

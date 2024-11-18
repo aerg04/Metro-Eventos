@@ -21,7 +21,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
 
                         </div>
                     </div>
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                         <h2 className="text-center text-lg font-semibold">Información Adicional</h2>
                         <div className="mt-2 bg-gray-100 p-2 rounded">
                         {Object.entries(rest).map(([key, value]) => (
@@ -36,7 +36,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
                             )
                         ))}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="mt-2">
                         <h2 className="text-center text-lg font-semibold">Etiquetas</h2>
                         <div className="mt-2 bg-gray-100 p-2 rounded">

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PopUpConfirmation from '../components/PopUpConfirmation';
 import PopUpMessage from '../components/PopUpMessage';
 
-function EventCreator({ handleSubmit, form = {} }) {
+function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento" }) {
     const [showError, setShowError] = useState(false);
+    const [errorMessage,setErrorMessage] = useState("")
     const [formData, setFormData] = useState({
         title: '',
         path: '',
@@ -20,7 +21,7 @@ function EventCreator({ handleSubmit, form = {} }) {
             path: form.path || '',
             date: form.date || '',
             place: form.place || '',
-            author: form.author || '',
+            author: form.author || 'h',
             entryType: form.entryType || '',
             description: form.description || '',
             labels: form.labels || []
@@ -104,7 +105,7 @@ function EventCreator({ handleSubmit, form = {} }) {
             <div className="flex flex-col items-center justify-center">
                 <PopUpConfirmation messageButton={"Publicar Evento"} message={"Publicar Evento"} onConfirm={handlePetition} />
             </div>
-            <h1 className='font-bold text-2xl'> Crear Evento</h1>
+            <h1 className='font-bold text-2xl'> {pageTitle}</h1>
             <div className="flex flex-col md:flex-row min-h-screen p-4 mt-2">
                 <div className="flex flex-col items-center w-full md:w-2/5">
                     <div className="w-64 h-64">
@@ -148,6 +149,7 @@ function EventCreator({ handleSubmit, form = {} }) {
                             value={formData.author}
                             onChange={handleChange}
                             className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                            readOnly
                         />
                         <label className="block text-sm font-medium text-gray-700 mt-4">Entrada</label>
                         <select

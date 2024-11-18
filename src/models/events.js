@@ -13,6 +13,15 @@ export async function getEvents() {
     // return events;
 }
 
+export async function editEvent(event,id) {
+    try {
+        const response = await axiosInstance.post(`/events/${id}`, event);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch event:", error);
+    }
+}
+
 // Function to convert an image file to a base64 string
 function convertImageToBase64(file) {
     const isBase64 = (str) => typeof str === 'string' && /^data:\w+\/[a-zA-Z+\-\.]+;base64,/.test(str);

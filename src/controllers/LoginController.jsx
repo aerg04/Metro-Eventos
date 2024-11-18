@@ -13,7 +13,7 @@ export default function LoginController(){
     async function handleLogin(email, password){
         try {
             await login(email, password);
-            navigate('/myevents');
+            navigate('/events');
         } catch (error) {
             setErrorMessage('Error. chequear credenciales');
             setShowError(true);

@@ -3,6 +3,7 @@ import EventCreator from '../pages/EventCreator';
 import { useNavigate } from 'react-router-dom';
 import { getEvents } from '../models/events';
 import { useParams } from 'react-router-dom';
+import { editEvent } from '../models/events';
 
 export default function EditorController() {
     const navigate = useNavigate();
@@ -15,21 +16,21 @@ export default function EditorController() {
         navigate(`/myevents`);
     };
 
-    async function handleCreate({...event}){
+    async function handleEdit({...event}){
         try {
-            //cambiar esto
-            await addEvent(event);
+            //cambiar esto por la funcion de editar
+            await editEvent(event,id);
             handleClick();
         } catch (err) {
             setError('Failed to add event. Please try again.');
-        }
+        } 
     };
     useEffect(() => {
         getEvents().then(fetchedEvents => {
             setEvents(fetchedEvents);
             const foundEvent = fetchedEvents.find(event => event.id === id);
             setEvent(foundEvent);
-            console.log(event);
+            // console.log(event);
         });
     }, [id]);
     if (!event) {
@@ -38,7 +39,7 @@ export default function EditorController() {
     return (
         <>
             {error && <PopupMessage message={error} onClose={() => setError(null)} messageOnClose={"Cerrar"} />}
-            <EventCreator handleSubmit={handleCreate} form={event}/>
+            <EventCreator handleSubmit={handleEdit} form={event} pageTitle='Editar Eventos'/>
         </>
     );
 }

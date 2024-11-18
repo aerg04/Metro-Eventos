@@ -15,7 +15,8 @@ export const login = async (email, password) => {
 export const register = async (data) => {
     try {
         const response = await axiosInstance.post('/auth/signup', data);
-        const { token } = response.data;
+        const { token } = response.data.token; 
+        // response.data.email y response.data.role son el email y el role del usuario    
         localStorage.setItem('token', token);
         return token;
     } catch (error) {

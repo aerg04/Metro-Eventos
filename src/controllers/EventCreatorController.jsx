@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { addEvent } from '../models/events.js';
 import { useState } from 'react';
 import PopupMessage from '../components/PopUpMessage.jsx';
+import { getUserInfo } from '../models/user.js';
 
 export default function EventCreatorController() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-
+    const user = getUserInfo();
+    // console.log(user);
     function handleClick(){
         navigate(`/myevents`);
     };
@@ -23,8 +25,8 @@ export default function EventCreatorController() {
 
     return (
         <>
-            {error && <PopupMessage message={error} onClose={() => setError(null)} messageOnClose={"Cerrar"} />}
-            <EventCreator handleSubmit={handleCreate} />
+            {error && <PopupMessage message={error} onClose={() => setError(null)} messageOnClose={"Cerrar"}  />}
+            <EventCreator handleSubmit={handleCreate} author={user.email}/>
         </>
     );
 }

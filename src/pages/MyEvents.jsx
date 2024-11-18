@@ -13,19 +13,23 @@ export default function MyEvents({onClick,events}) {
     <h1 className="font-bold text-2xl">Mis eventos</h1>
     </div>
     <div className="min-h-screen p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
-        {events.map((event, index) => (
-            <EventCom
-                key={index}
-                id={event.id}
-                title={event.title}
-                date={event.date}
-                place={event.place}
-                entryType={event.entryType}
-                author={event.author}
-                path={event.path}
-                handleClick={onClick}
-            />
-        ))}        
+            {events.length > 0 ? (
+                events.map((event, index) => (
+                    <EventCom
+                    key={index}
+                    id={event.id}
+                    title={event.title}
+                    date={event.date}
+                    place={event.place}
+                    entryType={event.entryType}
+                    author={event.author}
+                    path={event.path}
+                    handleClick={onClick}
+                    />
+                ))
+            ) : (
+                <p>No hay eventos</p>
+            )} 
     </div>
     </>
     )

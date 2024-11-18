@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-function SideBar({is_open}){
+function SideBar({ is_open, role }) {
 
     return (
         <div className="flex">
@@ -40,21 +40,23 @@ function SideBar({is_open}){
                             </div>
                         </NavLink>
                     </li>
-                    <li className="hover:bg-neutral-100 p-2 rounded">
-                        <NavLink 
-                            to="/myevents" 
-                            className={({ isActive }) => 
-                                isActive ? "block p-2 rounded bg-neutral-100" : "block p-2 rounded"
-                            }
-                        >
-                        <div className="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 14l2-2m0 0l2-2m-2 2l2 2m-2-2l-2 2m-6 2a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        Mis publicaciones
-                        </div>
-                        </NavLink>
-                    </li>
+                    {role === 'ROLE_CREADOR' && (
+                        <li className="hover:bg-neutral-100 p-2 rounded">
+                            <NavLink 
+                                to="/myevents" 
+                                className={({ isActive }) => 
+                                    isActive ? "block p-2 rounded bg-neutral-100" : "block p-2 rounded"
+                                }
+                            >
+                                <div className="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 14l2-2m0 0l2-2m-2 2l2 2m-2-2l-2 2m-6 2a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                    Mis publicaciones
+                                </div>
+                            </NavLink>
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getEvents } from '../models/events';
 import { useParams } from 'react-router-dom';
 import { editEvent } from '../models/events';
+import { getUserInfo } from '../models/user';
 
 export default function EditorController() {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function EditorController() {
     const [error, setError] = useState(null);
     const [events, setEvents] = useState([]);
     const [event, setEvent] = useState(null);
+    const user = getUserInfo();
 
     function handleClick(){
         navigate(`/myevents`);
@@ -39,7 +41,7 @@ export default function EditorController() {
     return (
         <>
             {error && <PopupMessage message={error} onClose={() => setError(null)} messageOnClose={"Cerrar"} />}
-            <EventCreator handleSubmit={handleEdit} form={event} pageTitle='Editar Eventos'/>
+            <EventCreator handleSubmit={handleEdit} form={event} pageTitle='Editar Eventos' author={user.email}/>
         </>
     );
 }

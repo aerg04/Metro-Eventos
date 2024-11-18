@@ -6,6 +6,7 @@ export async function getEvents() {
     try {
         const response = await axiosInstance.get('/events?page=1&size=20');
         const fetchedEvents = response.data;
+        console.log(fetchedEvents);
         return fetchedEvents;
     } catch (error) {
         console.error("Failed to fetch events:", error);
@@ -48,7 +49,7 @@ export async function addEvent(newEvent) {
         }
         
         const token = localStorage.getItem("token");
-
+        console.log(newEvent)
         // Send the new event data to the endpoint
         const response = await axiosInstance.post('/events', newEvent);
         const savedEvent = response.data;

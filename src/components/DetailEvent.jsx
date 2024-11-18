@@ -40,9 +40,9 @@ export default function DetailEvent({title, path, date, place, author, entryType
                     <div className="mt-2">
                         <h2 className="text-center text-lg font-semibold">Etiquetas</h2>
                         <div className="mt-2 bg-gray-100 p-2 rounded">
-                            {labels && labels.length > 0 ? (
-                                labels.map((label, index) => (
-                                    <span key={index} className="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full mr-2">{label}</span>
+                            {label && label.length > 0 ? (
+                                label.map((labelk, index) => (
+                                    <span key={index} className="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full mr-2">{labelk}</span>
                                 ))
                             ) : (
                                 <p>No hay etiquetas disponibles</p>

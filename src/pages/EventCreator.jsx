@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PopUpConfirmation from '../components/PopUpConfirmation';
 import PopUpMessage from '../components/PopUpMessage';
 
-function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento" }) {
+function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento", author }) {
     const [showError, setShowError] = useState(false);
     const [errorMessage,setErrorMessage] = useState("")
     const [formData, setFormData] = useState({
@@ -13,7 +13,8 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento" }) {
         author: '',
         entryType: '',
         description: '',
-        labels: []
+        label: [],
+        userEmail: ""
     });
     useEffect(() => {
         setFormData({
@@ -21,10 +22,11 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento" }) {
             path: form.path || '',
             date: form.date || '',
             place: form.place || '',
-            author: form.author || 'h',
+            author: author,
             entryType: form.entryType || '',
             description: form.description || '',
-            labels: form.labels || []
+            label: form.label || [],
+            userEmail: author
         });
     }, []);
     
@@ -234,17 +236,17 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento" }) {
                     <div className='mt-4'>
                         <h2 className="text-center text-lg font-semibold">Etiquetas</h2>
                         <div className="mt-2 bg-gray-100 p-2 rounded">
-                            {labelsArray.map(label => (
-                                <label key={label} className="block text-sm font-medium text-gray-700">
+                            {labelsArray.map(labelk => (
+                                <label key={labelk} className="block text-sm font-medium text-gray-700">
                                     <input
                                         type="checkbox"
-                                        name="labels"
-                                        value={label}
-                                        checked={formData.labels && formData.labels.includes(label)}
+                                        name="label"
+                                        value={labelk}
+                                        checked={formData.label && formData.label.includes(labelk)}
                                         onChange={handleChange}
                                         className="mr-2"
                                     />
-                                    {label}
+                                    {labelk}
                                 </label>
                             ))}
                         </div>

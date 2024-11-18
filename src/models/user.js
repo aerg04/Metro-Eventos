@@ -4,8 +4,13 @@ import axiosInstance from '../axiosConfig';
 export const login = async (email, password) => {
     try {
         const response = await axiosInstance.post('/auth/login', { email, password });
-        const { token } = response.data;
+        const token = response.data.token;
+        const emailk  = response.data.email;
+        const  role  = response.data.role;
+
         localStorage.setItem('token', token);
+        localStorage.setItem('email', emailk);
+        localStorage.setItem('role', role);
         return token;
     } catch (error) {
         throw new Error('Login failed');
@@ -15,10 +20,7 @@ export const login = async (email, password) => {
 export const register = async (data) => {
     try {
         const response = await axiosInstance.post('/auth/signup', data);
-        const { token } = response.data.token; 
-        // response.data.email y response.data.role son el email y el role del usuario    
-        localStorage.setItem('token', token);
-        return token;
+        return response.data;
     } catch (error) {
         throw new Error('Registration failed');
     }
@@ -31,3 +33,10 @@ export const logout = () => {
 export const getToken = () => {
     return localStorage.getItem('token');
 };
+
+export const getUserInfo = () =>{
+    return {
+        email: localStorage.getItem('email'),
+        role: localStorage.getItem('role'),
+    };
+}

@@ -48,13 +48,13 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento", autho
 
     const handleChange = (e) => {
         const { name, value, options, type, checked } = e.target;
-        if (name === 'labels') {
+        if (name === 'label') {
             const updatedLabels = checked
-                ? [...formData.labels, value]
-                : formData.labels.filter(label => label !== value);
+                ? [...formData.label, value]
+                : formData.label.filter(labelk => labelk !== value);
             setFormData({
                 ...formData,
-                labels: updatedLabels
+                label: updatedLabels
             });
         } else {
             setFormData({

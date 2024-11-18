@@ -1,4 +1,4 @@
-export default function DetailEvent({title, path, date, place, author, entryType, description, labels, ...rest}) {
+export default function DetailEvent({title, path, date, place, author, entryType, description, label, ...rest}) {
     return(<>
     <div className="flex flex-col md:flex-row min-h-screen p-4 mt-2">
                 <div className="flex flex-col items-center">

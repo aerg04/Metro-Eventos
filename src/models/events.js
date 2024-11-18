@@ -6,7 +6,7 @@ export async function getEvents() {
     try {
         const response = await axiosInstance.get('/events?page=1&size=20');
         const fetchedEvents = response.data;
-        console.log(fetchedEvents);
+        // console.log(fetchedEvents);
         return fetchedEvents;
     } catch (error) {
         console.error("Failed to fetch events:", error);
@@ -16,7 +16,7 @@ export async function getEvents() {
 
 export async function editEvent(event,id) {
     try {
-        const response = await axiosInstance.post(`/events/${id}`, event);
+        const response = await axiosInstance.put(`/events/${id}`, event);
         return response.data;
     } catch (error) {
         console.error("Failed to fetch event:", error);

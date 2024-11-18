@@ -5,6 +5,7 @@ import { getEvents } from '../models/events';
 import { useParams } from 'react-router-dom';
 import { editEvent } from '../models/events';
 import { getUserInfo } from '../models/user';
+import PopupMessage from '../components/PopUpMessage';
 
 export default function EditorController() {
     const navigate = useNavigate();
@@ -21,10 +22,13 @@ export default function EditorController() {
     async function handleEdit({...event}){
         try {
             //cambiar esto por la funcion de editar
-            await editEvent(event,id);
-            handleClick();
+            
+            const response = await editEvent(event,id);
+            if(response){
+                setError("Evento editado correctamente");
+            }
         } catch (err) {
-            setError('Failed to add event. Please try again.');
+            setError('Evento no editado. Por favor intente de nuevo.');
         } 
     };
     useEffect(() => {
@@ -40,7 +44,7 @@ export default function EditorController() {
     }
     return (
         <>
-            {error && <PopupMessage message={error} onClose={() => setError(null)} messageOnClose={"Cerrar"} />}
+            {error && <PopupMessage message={error} onClose={() => {setError(null);handleClick()}} messageOnClose={"Cerrar"} />}
             <EventCreator handleSubmit={handleEdit} form={event} pageTitle='Editar Eventos' author={user.email}/>
         </>
     );

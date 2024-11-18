@@ -16,7 +16,7 @@ export default function MyEvents({onClick,events}) {
         {events.map((event, index) => (
             <EventCom
                 key={index}
-                id={event.key}
+                id={event.id}
                 title={event.title}
                 date={event.date}
                 place={event.place}

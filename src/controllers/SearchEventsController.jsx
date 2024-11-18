@@ -2,6 +2,7 @@ import SearchEvents from '../pages/SearchEvents';
 // import events from "../assets/events.js";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { getEvents } from '../models/events';
 
 export default function EventsController() {
     const labelsArray = ["Educación", "Deporte", "Recreación"];
@@ -9,8 +10,16 @@ export default function EventsController() {
     const [eventsComplete, setEventsComplete] = useState([]);
 
     useEffect(() => {
-        setEventsRender(events);
-        setEventsComplete(events)
+        async function fetchEvents() {
+            try {
+                const fetchedEvents = await getEvents();
+                setEventsRender(fetchedEvents);
+                setEventsComplete(fetchedEvents);
+            } catch (error) {
+                console.error("Failed to fetch events:", error);
+            }
+        }
+        fetchEvents();
     }, []);
     
     function searchEventsByName(name) {
@@ -45,19 +54,6 @@ export default function EventsController() {
     function handleClick(id){
         navigate(`/event/${id}`);
     };
-
-    useEffect(() => {
-        async function fetchEvents() {
-            try {
-                const fetchedEvents = await getEvents();
-                setEvents(fetchedEvents);
-            } catch (error) {
-                console.error("Failed to fetch events:", error);
-            }
-        }
-
-        fetchEvents();
-    }, []);
     
     return (
         <SearchEvents

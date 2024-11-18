@@ -11,7 +11,8 @@ export default function DetailEventController() {
     useEffect(() => {
         getEvents().then(fetchedEvents => {
             setEvents(fetchedEvents);
-            const foundEvent = fetchedEvents.find(event => event.key === parseInt(id));
+            const foundEvent = fetchedEvents.find(event => event.id === id);
+            
             setEvent(foundEvent);
         });
     }, [id]);

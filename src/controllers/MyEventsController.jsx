@@ -11,6 +11,7 @@ export default function MyEventsController() {
     useEffect(() => {
         async function fetchEvents() {
             try {
+                //falta buscar eventos del usuario
                 const fetchedEvents = await getEvents();
                 setEvents(fetchedEvents);
             } catch (error) {
@@ -22,7 +23,7 @@ export default function MyEventsController() {
     }, []);
 
     function handleClick(id){
-        navigate(`/event/${id}`);
+        navigate(`/editevent/${id}`);
     };
     return <MyEvents onClick={handleClick} events={events} />
 }

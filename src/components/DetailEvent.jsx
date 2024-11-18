@@ -25,13 +25,15 @@ export default function DetailEvent({title, path, date, place, author, entryType
                         <h2 className="text-center text-lg font-semibold">Información Adicional</h2>
                         <div className="mt-2 bg-gray-100 p-2 rounded">
                         {Object.entries(rest).map(([key, value]) => (
-                            <div key={key}>
-                                <strong>{key}:</strong> {typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://')) ? (
-                                    <a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{value}</a>
-                                ) : (
-                                    value
-                                )}
-                            </div>
+                            key !== 'id' && key !== 'labels' && (
+                                <div key={key}>
+                                    <strong>{key}:</strong> {typeof value === 'string' && (value.startsWith('http://') || value.startsWith('https://')) ? (
+                                        <a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{value}</a>
+                                    ) : (
+                                        value
+                                    )}
+                                </div>
+                            )
                         ))}
                         </div>
                     </div>

@@ -32,9 +32,9 @@ export default function EventsController() {
         return eventsComplete.filter(event => new Date(event.date).toDateString() === new Date(date).toDateString());
     }
 
-    function searchEventsByLabel(label) {
-        if (!label) return eventsComplete;
-        return eventsComplete.filter(event => event.labels.includes(label));
+    function searchEventsByLabel(labelk) {
+        if (!labelk) return eventsComplete;
+        return eventsComplete.filter(event => event.label.includes(labekl));
     }
 
     function matchAllEvents(name, date, label) {

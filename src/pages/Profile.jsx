@@ -1,0 +1,181 @@
+import React, { useState, useEffect } from 'react';
+
+export default function Profile({userData, handleUpdateUser}) {
+    const [formData, setFormData] = useState({
+        name: '',
+        lastName:'',
+        email:'',
+        password:'',
+        gender:'',
+        birthDate:'',
+        profilePhoto:'',
+        });
+
+    const [isEditing, setIsEditing] = useState(false);
+
+    useEffect (() => {
+        setFormData({
+        name: userData?.name || '',
+        lastName: userData?.lastName || '',
+        email: userData?.email || '',
+        password: '',
+        gender: userData?.gender || '',
+        birthDate: userData?.birthDate || '',
+        profilePhoto: userData?.profilePhoto || '',
+            });
+        }, [userData]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    profilePhoto: reader.result,
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSaveChanges = () => {
+        if (!isEditing) return;
+        handleUpdateUser(formData);
+        setIsEditing(false);
+    };
+
+    return (
+<div className="container mx-auto p-6 bg-gray-50 shadow-lg rounded-lg mb-10 mt-10">
+    <h1 className="text-2xl font-bold mb-6 text-center">Perfil de Usuario</h1>
+    <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+
+        <div className="flex flex-col items-center space-y-4">
+            <div className="w-30 h-30 rounded-full overflow-hidden border border-gray-300">
+                <img
+                    className="object-cover w-full h-full"
+                    src={formData.profilePhoto || 'https://via.placeholder.com/250'}
+                    alt="Perfil"
+                />
+            </div>
+            <input
+                type="file"
+                accept="image/*"
+                disabled={!isEditing}
+                onChange={handleFileChange}
+                className="file-input"
+            />
+        </div>
+
+
+        <div className="flex flex-col flex-grow space-y-4">
+            <div>
+                <label className="block font-medium">Nombre</label>
+                <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className="input-field"
+                />
+            </div>
+            <div>
+                <label className="block font-medium">Apellido</label>
+                <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className="input-field"
+                />
+            </div>
+            <div>
+                <label className="block font-medium">Correo Electrónico</label>
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    disabled
+                    className="input-field bg-gray-200"
+                />
+            </div>
+            <div>
+                <label className="block font-medium">Contraseña</label>
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className="input-field"
+                />
+            </div>
+            <div>
+                <label className="block font-medium">Género</label>
+                <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className="input-field"
+                >
+                    <option value="">Seleccione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div>
+                <label className="block font-medium">Fecha de Nacimiento</label>
+                <input
+                    type="date"
+                    name="birthDate"
+                    value={formData.birthDate}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className="input-field"
+                />
+            </div>
+        </div>
+    </div>
+
+
+    <div className="mt-6 flex justify-end space-x-4">
+        {isEditing ? (
+            <button
+                onClick={handleSaveChanges}
+                className="px-4 py-2 bg-green-500 text-white rounded shadow-md hover:bg-green-600"
+            >
+                Guardar Cambios
+            </button>
+        ) : (
+            <button
+                onClick={() => setIsEditing(true)}
+                className="px-4 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600"
+            >
+                Editar
+            </button>
+        )}
+        {isEditing && (
+            <button
+                onClick={() => setIsEditing(false)}
+                className="px-4 py-2 bg-gray-500 text-white rounded shadow-md hover:bg-gray-600"
+            >
+                Cancelar
+            </button>
+        )}
+    </div>
+</div>
+
+  );
+    }

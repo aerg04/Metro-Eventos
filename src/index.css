@@ -14,3 +14,29 @@
     text-overflow: ellipsis;
     white-space: normal;
 }
+
+.input-field {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    transition: border-color 0.2s;
+}
+
+.input-field:focus {
+    border-color: #6366f1;
+    outline: none;
+}
+
+.file-input {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    transition: background-color 0.2s;
+}
+
+.file-input:hover {
+    background-color: #f3f4f6;
+}

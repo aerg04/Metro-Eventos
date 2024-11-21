@@ -9,6 +9,7 @@ import EventsController from './controllers/SearchEventsController';
 import Layout from "./components/Layout"
 import EditorController from './controllers/EditorController';
 import PrivateRoute from './components/PrivateRoute';
+import ProfileController from './controllers/ProfileController';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/events" element={<PrivateRoute><EventsController /></PrivateRoute>} />
           <Route path="/createevent" element={<PrivateRoute><EventCreatorController /></PrivateRoute>} />
           <Route path="/editevent/:id" element={<PrivateRoute><EditorController /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><ProfileController /></PrivateRoute>} />
+
           </Routes>
         </Layout>
       </Router>

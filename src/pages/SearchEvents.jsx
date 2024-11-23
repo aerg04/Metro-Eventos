@@ -4,7 +4,7 @@ import EventCom from "../components/EventCom"
 export default function SearchEvents({onClick, events, matchAllEvents, labelsField}) {
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
-    const [label, setLabel] = useState("");
+    const [label, setLabel] = useState([]);
 
     useEffect(() => {
         matchAllEvents(name, date, label);
@@ -13,24 +13,37 @@ export default function SearchEvents({onClick, events, matchAllEvents, labelsFie
     return(
         <>
         <div className="p-2 ">
-            <div className="flex flex-row justify-center bg-gray-200 px-4 rounded-lg">
-                <input type="text" placeholder="Nombre" className="p-2 m-2 w-1/2 rounded-lg" onChange={(e) => {
+            <div className="flex flex-col sm:flex-row justify-center bg-gray-200 px-4 rounded-lg">
+                <input type="text" placeholder="Nombre" className="p-2 m-2 sm:w-1/2 rounded-lg" onChange={(e) => {
                     setName(e.target.value);
                 }}/>
                 <input type="date" className="p-2 m-2 rounded-lg" onChange={(e) => {
                     setDate(e.target.value);
                 }}/>
-                <select className="p-2 m-2 rounded-lg" onChange={(e) => {
-                    setLabel(e.target.value);
-                }}> 
-                    <option value="">Selecciona una etiqueta</option>
-                    {labelsField.map((label, index) => (
-                        <option key={index} value={label}>{label}</option>
+                <div className="p-2 m-2 rounded-lg bg-white sm:max-h-12 sm:overflow-y-auto">
+                    <span className="p-2 text-center justify-center flex">Etiquetas</span>
+                    {labelsField.map((labelk, index) => (
+                        <label key={index} className="block text-sm font-medium text-gray-700">
+                            <input
+                                type="checkbox"
+                                name="label"
+                                value={labelk}
+                                checked={label.includes(labelk)}
+                                onChange={(e) => {
+                                    const selectedOptions = e.target.checked
+                                        ? [...label, labelk]
+                                        : label.filter((item) => item !== labelk);
+                                    setLabel(selectedOptions);
+                                }}
+                                className="mr-2"
+                            />
+                            {labelk}
+                        </label>
                     ))}
-                </select>
+                </div>
             </div>
         </div>
-        <div className="min-h-screen p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
+        <div className="h-screen overflow-y-auto p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
             {events.length > 0 ? (
                 events.map((event, index) => (
                     <EventCom

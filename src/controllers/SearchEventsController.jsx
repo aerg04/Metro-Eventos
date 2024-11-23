@@ -33,8 +33,11 @@ export default function EventsController() {
     }
 
     function searchEventsByLabel(labelk) {
-        if (!labelk) return eventsComplete;
-        return eventsComplete.filter(event => event.label.includes(labekl));
+        console.log(labelk);
+        if (!labelk || labelk.length === 0) return eventsComplete;
+        return eventsComplete.filter(event => 
+            labelk.every(label => event.label.includes(label))
+        );
     }
 
     function matchAllEvents(name, date, label) {

@@ -19,7 +19,7 @@ export const login = async (email, password) => {
 
 export const register = async (data) => {
     try {
-        const exist = await axiosInstance.get(`/users/${mail}`, data);
+        const exist = await axiosInstance.get(`/users/${email}`, data);
         if(exist.data.length > 0){
             throw new Error('Email already exists');
         }

@@ -14,6 +14,7 @@ export default function Profile({userData, handleUpdateUser}) {
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect (() => {
+        if (userData) {
         setFormData({
         name: userData?.name || '',
         lastName: userData?.lastName || '',
@@ -23,7 +24,9 @@ export default function Profile({userData, handleUpdateUser}) {
         birthDate: userData?.birthDate || '',
         profilePhoto: userData?.profilePhoto || '',
             });
-        }, [userData]);
+        }
+    }, [userData]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;

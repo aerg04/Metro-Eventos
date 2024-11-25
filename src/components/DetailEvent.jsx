@@ -1,9 +1,12 @@
 export default function DetailEvent({title, path, date, place, author, entryType, description, label, ...rest}) {
 
+    //const baseUrl = window.location.origin;
+    //const eventUrl = `${baseUrl}${path}`;
+
     const urlsCompartir = {
-        whatsapp: `https://wa.me/?text=Mira este evento: ${title} en ${place} el ${date}. Más información aquí.`,
-        telegram:`https://t.me/share/url?url=&text=Mira este evento: ${title} en ${place} el ${date}. Más información aquí.`,
-        gmail:`mailto:?subject=Evento: ${title}&body=Mira este evento: ${title} en ${place} el ${date}. Más información aquí.`,
+        whatsapp: `https://wa.me/?text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
+        telegram:`https://t.me/share/url?url=&text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
+        gmail:`mailto:?subject=Evento: ${title}&body=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
         };
 
     return(<>

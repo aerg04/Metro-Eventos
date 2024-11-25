@@ -6,12 +6,21 @@ export async function getEvents() {
     try {
         const response = await axiosInstance.get('/events?page=1&size=20');
         const fetchedEvents = response.data;
-        // console.log(fetchedEvents);
-        return fetchedEvents;
+
+        const uniqueEvents = fetchedEvents.filter(
+            (event, index, self) =>
+                index === self.findIndex((e) => e.id === event.id)
+        );
+
+        const validEvents = uniqueEvents.filter(
+            (event) => event.title && event.date
+        );
+
+        return validEvents;
     } catch (error) {
-        console.error("Failed to fetch events:", error);
+        console.error('Failed to fetch events:', error);
+        return [];
     }
-    // return events;
 }
 
 export async function editEvent(event,id) {

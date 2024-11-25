@@ -58,6 +58,26 @@ function EventCreator({ handleEdit, handleDelete, form = {}, pageTitle = "Editar
         }
     };
 
+    const validateForm = () => {
+        if (
+            !formData.title.trim() ||
+            !formData.date.trim() ||
+            !formData.place.trim() ||
+            !formData.entryType.trim() ||
+            !formData.description.trim()
+        ) {
+            setErrorMessage("Por favor, completa todos los campos.");
+            setShowError(true);
+            return false;
+        }
+        if (formData.label.length === 0) {
+            setErrorMessage("Por favor, selecciona al menos una etiqueta.");
+            setShowError(true);
+            return false;
+        }
+        return true;
+    };
+
     function handleCloseError() {
         setShowError(false);
         setErrorMessage('');
@@ -175,12 +195,15 @@ function EventCreator({ handleEdit, handleDelete, form = {}, pageTitle = "Editar
                         <PopUpConfirmation
                             messageButton="Editar Evento"
                             message="¿Estás seguro de que deseas editar este evento?"
-                            onConfirm={() => handleEdit(formData)}
+                            onConfirm={() => {
+                                if (validateForm()) handleEdit(formData);
+                                }}
                         />
                         <PopUpConfirmation
                             messageButton="Eliminar Evento"
                             message="¿Estás seguro de que deseas eliminar este evento?"
-                            onConfirm={() => handleDelete(formData.id)}
+                            onConfirm={() => {if (validateForm()) handleDelete(formData.id);
+                                }}
                         />
                     </div>
                 </div>

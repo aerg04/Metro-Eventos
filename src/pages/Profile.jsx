@@ -50,10 +50,26 @@ export default function Profile({userData, handleUpdateUser}) {
         }
     };
 
+    const validateProfileForm = () => {
+        const hasNumbers = (str) => /\d/.test(str);
+
+        if (hasNumbers(formData.name)) {
+            alert("El nombre no debe contener números.");
+            return false;
+        }
+        if (hasNumbers(formData.lastName)) {
+            alert("El apellido no debe contener números.");
+            return false;
+        }
+        return true;
+    };
+
     const handleSaveChanges = () => {
         if (!isEditing) return;
+    if (validateProfileForm()) {
         handleUpdateUser(formData);
         setIsEditing(false);
+    }
     };
 
     return (

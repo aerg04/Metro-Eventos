@@ -1,7 +1,7 @@
 import EventCom from "../components/EventCom";
 import { Link } from 'react-router-dom';
 
-export default function MyEvents({onClick,events}) {
+export default function MyEvents({onClick,loading ,events}) {
     return(
     <>
     <div className="pt-4 px-10 gap-y-2">
@@ -13,7 +13,13 @@ export default function MyEvents({onClick,events}) {
     <h1 className="font-bold text-2xl">Mis eventos</h1>
     </div>
     <div className="min-h-screen p-2 grid justify-evenly grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
-            {events.length > 0 ? (
+            {loading ? (
+                    <div className="main-container">
+                        <div className="content">
+                            <p className="text-2xl font-semibold text-center mt-12 mb-120">Cargando eventos...</p>
+                        </div>
+                    </div>
+            ) : events.length > 0 ? (
                 events.map((event, index) => (
                     <EventCom
                     key={index}
@@ -28,7 +34,11 @@ export default function MyEvents({onClick,events}) {
                     />
                 ))
             ) : (
-                <p>No hay eventos</p>
+               <div className="main-container">
+                  <div className="content ">
+                  <p className="text-2xl font-semibold text-center mt-12 mb-120">No hay eventos</p>
+                  </div>
+                  </div>
             )} 
     </div>
     </>

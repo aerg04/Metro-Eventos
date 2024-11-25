@@ -43,4 +43,14 @@ export const getUserInfo = () =>{
         email: localStorage.getItem('email'),
         role: localStorage.getItem('role'),
     };
-}
+};
+
+export const getUserProfile = async (email) => {
+    try {
+        const response = await axiosInstance.get(`/users/profile/${email}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener el perfil del usuario:', error);
+        throw error;
+    }
+};

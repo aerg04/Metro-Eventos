@@ -4,12 +4,15 @@ import MyEvents from "../pages/MyEvents";
 import { useNavigate } from "react-router-dom";
 import { getEvents } from "../models/events";
 import { getUserInfo } from "../models/user";
+
 export default function MyEventsController() {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchEvents() {
+            setLoading(true);
             try {
                 //falta buscar eventos del usuario
                 const fetchedEvents = await getEvents();
@@ -17,7 +20,9 @@ export default function MyEventsController() {
                 setEvents(filterEvents);
             } catch (error) {
                 console.error("Failed to fetch events:", error);
-            }
+            } finally {
+                setLoading(false);
+                }
         }
 
         fetchEvents();
@@ -31,5 +36,5 @@ export default function MyEventsController() {
     function handleClick(id){
         navigate(`/editevent/${id}`);
     };
-    return <MyEvents onClick={handleClick} events={events} />
+    return <MyEvents onClick={handleClick} loading={loading} events={events} />
 }

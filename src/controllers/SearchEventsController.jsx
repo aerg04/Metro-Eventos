@@ -8,15 +8,19 @@ export default function EventsController() {
     const labelsArray = ["Educación", "Deporte", "Recreación"];
     const [eventsRender, setEventsRender] = useState([]);
     const [eventsComplete, setEventsComplete] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchEvents() {
+            setLoading(true);
             try {
                 const fetchedEvents = await getEvents();
-                setEventsRender(fetchedEvents);
                 setEventsComplete(fetchedEvents);
+                setEventsRender(fetchedEvents);
             } catch (error) {
-                console.error("Failed to fetch events:", error);
+                console.error("Error al cargar los eventos:", error);
+            } finally {
+                setLoading(false);
             }
         }
         fetchEvents();
@@ -40,16 +44,18 @@ export default function EventsController() {
         );
     }
 
-    function matchAllEvents(name, date, label) {
+function matchAllEvents(name, date, labels) {
         const nameMatches = searchEventsByName(name);
         const dateMatches = searchEventsByDate(date);
-        const labelMatches = searchEventsByLabel(label);
+        const labelMatches = searchEventsByLabel(labels);
 
-        setEventsRender(eventsComplete.filter(event => 
-            nameMatches.includes(event) && 
-            dateMatches.includes(event) && 
+        const filteredEvents = eventsComplete.filter(event =>
+            nameMatches.includes(event) &&
+            dateMatches.includes(event) &&
             labelMatches.includes(event)
-        ))
+        );
+
+        setEventsRender(filteredEvents);
     }
 
     const navigate = useNavigate();
@@ -61,6 +67,7 @@ export default function EventsController() {
     return (
         <SearchEvents
             events={eventsRender}
+            loading={loading}
             onClick={handleClick}
             matchAllEvents={matchAllEvents}
             labelsField={labelsArray}

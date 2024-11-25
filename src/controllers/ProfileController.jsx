@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Profile from '../pages/Profile';
+import { getUserProfile } from "../models/user";
+import { getUserInfo } from "../models/user";
 
 const ProfileController = () => {
     const [userData, setUserData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
 useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch('/api/user/profile');
-            if (response.ok) {
-                const data = await response.json();
-                setUserData(data);
-            }
+            const {email} = getUserInfo();
+            const data = await getUserProfile(email);
+            setUserData(data);
         } catch (error) {
             console.error('Error al cargar el perfil:', error);
-        }
+            setError('Error al cargar el perfil');
+        } finally {
+            setIsLoading(false);
+                      }
     };
     fetchData();
 }, []);
@@ -22,14 +27,10 @@ useEffect(() => {
 
     const handleUpdateUser = async (updatedData) => {
         try {
-            const response = await fetch('/api/user/profile', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedData),
-            });
-            if (response.ok) {
-                const updatedUser = await response.json();
-                setUserData(updatedUser);
+            const { email } = getUserInfo(); // Obtener email desde localStorage
+            const response = await axiosInstance.put(`/users/${email}`, updatedData);
+            if (response.status === 200) {
+                setUserData(response.data);
             } else {
                 console.error('Error al actualizar los datos del usuario');
             }

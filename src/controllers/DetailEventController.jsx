@@ -18,7 +18,11 @@ export default function DetailEventController() {
     }, [id]);
 
     if (!event) {
-        return <div>Evento no encontrado</div>;
+        return  <div className="main-container">
+                <div className="content">
+                <p className="text-2xl font-semibold text-center mt-12 mb-120">Cargando evento...</p>
+              </div>
+           </div>;
     }
     return <DetailEvent 
                 {...event}

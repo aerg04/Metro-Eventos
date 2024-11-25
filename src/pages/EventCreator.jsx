@@ -33,6 +33,19 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento", autho
     // console.log(formData);
     const labelsArray = ["Educación", "Deporte", "Recreación"]; // Add more labels as needed
 
+    function handlePetition() {
+        // Validate formData
+        const requiredFields = ['title', 'path', 'date', 'place', 'author', 'entryType', 'description'];
+        for (const field of requiredFields) {
+            if (!formData[field]) {
+                setErrorMessage(`The field "${field}" no `);
+                setShowError(true);
+                return;
+            }
+        }
+        handleSubmit(formData);
+        ;
+    };
 
 
     const handleFileChange = (e) => {
@@ -58,6 +71,10 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento", autho
         }
     };
 
+    function handleCloseError() {
+        setShowError(false);
+        setErrorMessage('');
+    };
 
     return (
         <div className="min-h-screen bg-gray-50 flex justify-center items-center py-8 px-4">
@@ -164,14 +181,24 @@ function EventCreator({ handleSubmit, form = {}, pageTitle="Crear Evento", autho
                 />
             </div>
 
-            <button
+            {/* <button
                 type="button"
                 className="w-full py-2 px-4 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 focus:outline-none"
+                onClick={() => handlePetition()}
                  >
                         Publicar Evento
-            </button>
+            </button> */}
+            <div className="flex flex-col items-center justify-center">
+                <PopUpConfirmation messageButton={"Publicar Evento"} message={"Publicar Evento"} onConfirm={handlePetition} />
+            </div>
             </div>
         </div>
+        {showError && (
+                <PopUpMessage
+                    message={errorMessage}
+                    onClose={handleCloseError}
+                    messageOnClose={"Cerrar"}
+        />)}
     </div>
 );
 }

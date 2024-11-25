@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaSearch } from 'react-icons/fa';
 import EventCom from "../components/EventCom";
 
-export default function SearchEvents({onClick, events, loading, matchAllEvents, labelsField}) {
+export default function SearchEvents({onClick, events, loading, matchAllEvents, labelsField, handleClick}) {
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
     const [label, setLabel] = useState([]);
@@ -67,6 +67,7 @@ useEffect(() => {
                             author={event.author}
                             path={event.path}
                             handleClick={onClick}
+                            handleBookmark={handleClick}
                         />
                     ))
                 ) : (

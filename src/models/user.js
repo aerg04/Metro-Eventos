@@ -19,10 +19,10 @@ export const login = async (email, password) => {
 
 export const register = async (data) => {
     try {
-        const exist = await axiosInstance.get(`/users/${mail}`, data);
-        if(exist.data.length > 0){
-            throw new Error('Email already exists');
-        }
+        // const exist = await axiosInstance.get(`/users/${data.mail}`, data);
+        // if(exist.data.length > 0){
+        //     throw new Error('Email already exists');
+        // }
         const response = await axiosInstance.post('/auth/signup', data);
         return response.data;
     } catch (error) {
@@ -54,3 +54,29 @@ export const getUserProfile = async (email) => {
         throw error;
     }
 };
+
+export async function getUserBookmarks() {
+    try{
+        const email = localStorage.getItem('email');
+        const response = await axiosInstance.get(`/users/${email}`);
+        console.log(response.data.bookmarks);
+        return response.data.bookmarks;
+
+    }catch(error){
+        console.error('Error al obtener los bookmarks del usuario:', error);
+   
+    }
+
+}
+
+export async function uptadeBookmark() {
+    try{
+        const response = await axiosInstance.put('/users/bookmarks', {id});
+        return response.data;
+
+    }catch(error){
+        console.error('Error al agregar el bookmark:', error);
+        
+    }
+
+}

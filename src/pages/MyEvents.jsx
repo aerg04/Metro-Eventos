@@ -31,6 +31,7 @@ export default function MyEvents({onClick,loading ,events}) {
                     author={event.author}
                     path={event.path}
                     handleClick={onClick}
+                    showBookmark={false}
                     />
                 ))
             ) : (

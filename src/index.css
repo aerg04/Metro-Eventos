@@ -80,3 +80,41 @@
     font-size: 14px;
     color: white;
 }
+
+
+/* Fuente más grande y negra para todos los días */
+.react-calendar__tile {
+    font-size: 1rem; /* Aumenta el tamaño de la fuente */
+    color: black;    /* Color negro predeterminado */
+    font-weight: bold; /* Asegura que se vea más claro */
+}
+
+/* Días con eventos */
+.react-calendar__tile--hasEvent {
+  color: orange !important; /* Texto en naranja */
+  background-color: #f0f0f0 !important; /* Fondo gris claro */
+  font-weight: bold; /* Asegura un texto destacado */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animación suave */
+}
+
+/* Hover para días con eventos */
+.react-calendar__tile--hasEvent:hover {
+  background-color: #d4d4d4 !important; /* Fondo más oscuro en hover */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra elegante */
+}
+/* Quitar estilos adicionales */
+.react-calendar__tile:disabled {
+    color: gray !important; /* Días deshabilitados, como de otro mes */
+}
+
+.react-calendar__tile--weekend {
+  color: black !important;
+}
+
+/* Vista compacta sin margen innecesario */
+.compact-calendar {
+    margin: 0 auto; /* Centrado */
+    width: 100%; /* Ocupa todo el espacio permitido */
+    border: none; /* Sin borde externo */
+}

@@ -15,7 +15,7 @@ useEffect(() => {
     return(
         <>
         <div className="p-2 ">
-            <div className="flex flex-col sm:flex-row justify-center bg-gray-200 px-4 py-3 space-x-4 rounded-lg">
+            <div className="flex flex-col sm:flex-row justify-center bg-gray-200 px-4 py-3 sm:space-x-4 rounded-lg">
 
                 <input type="text" placeholder="Ingresa el nombre" className="p-2 m-2 sm:w-1/2 rounded-lg border border-gray-300" onChange={(e) => {
                     setName(e.target.value);

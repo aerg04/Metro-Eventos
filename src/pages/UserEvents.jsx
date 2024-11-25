@@ -2,10 +2,17 @@ import EventCom from "../components/EventCom";
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getSavedEvents } from '../models/user';
 
 export default function MyEvents({onClick,loading ,events}) {
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+    useEffect(() => {
+        getSavedEvents(userId).then(savedEvents => {
+            setEvents(savedEvents);
+        });
+    }, []);
 
     const eventDates = events.map(event => new Date(event.date));
 
@@ -16,11 +23,6 @@ export default function MyEvents({onClick,loading ,events}) {
     return(
     <>
     <div className="pt-4 px-10 gap-y-2">
-    <div className="flex flex-col items-center justify-center">
-        <Link to="/createevent" className="w-1/2 py-2 bg-orange-500 text-white text-center rounded-md shadow-sm hover:bg-orange-600 m">
-                    Crear evento
-        </Link>
-    </div>
     <h1 className="font-bold text-2xl">Mis eventos</h1>
     </div>
 

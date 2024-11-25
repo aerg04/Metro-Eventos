@@ -3,6 +3,12 @@ export default function DetailEvent({title, path, date, place, author, entryType
     //const baseUrl = window.location.origin;
     //const eventUrl = `${baseUrl}${path}`;
 
+    const handleSubscribe = () => {
+        // Lógica para manejar la suscripción del usuario
+        // Puedes llamar a un controlador o actualizar el estado del usuario
+        alert(`Te has suscrito al evento: ${title}`);
+    };
+
     const urlsCompartir = {
         whatsapp: `https://wa.me/?text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
         telegram:`https://t.me/share/url?url=&text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
@@ -26,7 +32,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
 
 
                 <div className="flex flex-col bg-white shadow-md p-6 rounded-lg w-full lg:w-2/3">
-                    <div className="mb-6">
+                    <div className="mb-6 mt-6">
                         <h1 className="text-2xl text-center font-semibold">Descripción</h1>
                         <div className="mt-4 bg-gray-100 p-4 rounded-lg shadow-inner">
                             <p className="text-xl text-gray-700">{description}</p>
@@ -49,7 +55,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
                         ))}
                         </div>
                     </div> */}
-                    <div className="mb-6">
+                    <div className="mb-6 mt-20">
                         <h2 className="text-center text-xl font-semibold">Etiquetas</h2>
                         <div className="mt-4 flex flex-wrap gap-2 justify-center bg-gray-100 p-2 rounded">
                             {label && label.length > 0 ? (
@@ -62,7 +68,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
                         </div>
                         </div>
 
-                        <div className="mb-6">
+                        <div className="mb-6 mt-20">
                             <h2 className="text-center text-xl font-semibold">Compartir este evento</h2>
                         <div className="flex justify-center mt-6 space-x-6">
                                 <a href={urlsCompartir.whatsapp} target="_blank" rel="noopener noreferrer"
@@ -95,6 +101,14 @@ export default function DetailEvent({title, path, date, place, author, entryType
                               />
                            </a>
 
+                        </div>
+                        <div className="flex justify-center mt-20">
+                            <button
+                                onClick={() => handleSubscribe()}
+                                className="py-3 px-5 bg-blue-500 text-white text-2xl rounded-md shadow hover:bg-blue-600 transition"
+                            >
+                                Suscribirse
+                            </button>
                         </div>
                     </div>
                 </div>

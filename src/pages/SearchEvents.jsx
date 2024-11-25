@@ -48,7 +48,7 @@ useEffect(() => {
             </div>
         </div>
 
-        <div className="h-auto overflow-y-auto p-2 grid justify-evenly gap-4 grid-cols-[repeat(auto-fill,minmax(256px,1fr))] lg:grid-cols-4">
+        <div className="min-h-screen p-2 grid gap-10 grid-cols-[repeat(auto-fill,minmax(256px,1fr))]">
                 {loading ? (
                     <div className="main-container">
                         <div className="content">

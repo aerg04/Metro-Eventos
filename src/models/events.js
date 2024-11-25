@@ -67,3 +67,13 @@ export async function addEvent(newEvent) {
         console.error("Failed to add event:", error);
     }
 }
+
+export async function deleteEvent(id) {
+    try {
+        const response = await axiosInstance.delete(`/events/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Fallo al borrar evento", error);
+        throw new Error("No se pudo eliminar el evento");
+    }
+}

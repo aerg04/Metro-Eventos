@@ -1,9 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import EventCreator from '../pages/EventCreator';
+import EventEditErase from '../pages/EventEditErase';
 import { useNavigate } from 'react-router-dom';
 import { getEvents } from '../models/events';
 import { useParams } from 'react-router-dom';
 import { editEvent } from '../models/events';
+import { deleteEvent } from '../models/events';
 import { getUserInfo } from '../models/user';
 import PopupMessage from '../components/PopUpMessage';
 
@@ -31,6 +32,16 @@ export default function EditorController() {
             setError('Evento no editado. Por favor intente de nuevo.');
         } 
     };
+
+async function handleDelete(id) {
+    try {
+        await deleteEvent(id);
+        setError("Evento eliminado correctamente");
+    } catch (err) {
+        setError('No se pudo eliminar el evento. Inténtelo nuevamente.');
+    }
+};
+
     useEffect(() => {
         getEvents().then(fetchedEvents => {
             setEvents(fetchedEvents);
@@ -39,13 +50,33 @@ export default function EditorController() {
             // console.log(event);
         });
     }, [id]);
+
     if (!event) {
-        return <div>Evento no encontrado</div>;
+        return  <div className="main-container">
+                   <div className="content">
+                   <p className="text-2xl font-semibold mt-12 mb-120">Cargando evento...</p>
+                 </div>
+                </div>;
     }
     return (
-        <>
-            {error && <PopupMessage message={error} onClose={() => {setError(null);handleClick()}} messageOnClose={"Cerrar"} />}
-            <EventCreator handleSubmit={handleEdit} form={event} pageTitle='Editar Eventos' author={user.email}/>
-        </>
-    );
+    <>
+        {error && (
+            <PopupMessage
+                message={error}
+                onClose={() => {
+                    setError(null);
+                    handleClick();
+                }}
+                messageOnClose="Cerrar"
+            />
+        )}
+        <EventEditErase
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            form={event}
+            pageTitle="Editar Eventos"
+            author={user.email}
+        />
+    </>
+);
 }

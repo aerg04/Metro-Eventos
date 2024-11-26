@@ -59,8 +59,8 @@ export async function getUserBookmarks() {
     try{
         const email = localStorage.getItem('email');
         const response = await axiosInstance.get(`/users/${email}`);
-        console.log(response.data.bookmarks);
-        return response.data.bookmarks;
+        // console.log(response.data.bookmarks);
+        return response.data;
 
     }catch(error){
         console.error('Error al obtener los bookmarks del usuario:', error);
@@ -69,9 +69,11 @@ export async function getUserBookmarks() {
 
 }
 
-export async function uptadeBookmark() {
+export async function updateBookmark(user) {
     try{
-        const response = await axiosInstance.put('/users/bookmarks', {id});
+        console.log(user);
+        const email = localStorage.getItem('email');
+        const response = await axiosInstance.put(`/users/${email}`,user);
         return response.data;
 
     }catch(error){

@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 export default function EventCom({id, title, path, date, place, author, entryType, handleClick, bookmarkState=false, showBookmark=true, handleBookmark={}}) {
     const [bookmarked, setBookmarked] = useState(false);
     
-    useEffect(() => {setBookmarked(bookmarkState)}, []);
+    useEffect(() => {setBookmarked(bookmarkState)}, [bookmarkState]);
 
     const handleBookmarkClick = (e) => {
         e.stopPropagation();

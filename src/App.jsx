@@ -10,6 +10,7 @@ import Layout from "./components/Layout"
 import EditorController from './controllers/EditorController';
 import PrivateRoute from './components/PrivateRoute';
 import ProfileController from './controllers/ProfileController';
+import BookmarksController from './controllers/BookmarksController';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/createevent" element={<PrivateRoute><EventCreatorController /></PrivateRoute>} />
           <Route path="/editevent/:id" element={<PrivateRoute><EditorController /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><ProfileController /></PrivateRoute>} />
+          <Route path="/bookmarks" element={<PrivateRoute><BookmarksController /></PrivateRoute>} />
 
           </Routes>
         </Layout>

@@ -1,19 +1,10 @@
+import React, { useState } from 'react';
 import EventCom from "../components/EventCom";
-import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useEffect, useState } from 'react';
-import { getSavedEvents } from '../models/user';
 
-export default function MyEvents({onClick,loading ,events}) {
+export default function SavedEvents({ onClick, loading, events }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-    useEffect(() => {
-        getSavedEvents(userId).then(savedEvents => {
-            setEvents(savedEvents);
-        });
-    }, []);
-
     const eventDates = events.map(event => new Date(event.date));
 
     const handleDateChange = (date) => {
@@ -23,7 +14,7 @@ export default function MyEvents({onClick,loading ,events}) {
     return(
     <>
     <div className="pt-4 px-10 gap-y-2">
-    <h1 className="font-bold text-2xl">Mis eventos</h1>
+    <h1 className="font-bold text-2xl">Eventos Guardados</h1>
     </div>
 
             <div className="min-h-screen p-2 grid lg:grid-cols-[min-content,1fr] gap-4">

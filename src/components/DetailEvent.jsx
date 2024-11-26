@@ -1,7 +1,7 @@
-export default function DetailEvent({title, path, date, place, author, entryType, description, label, ...rest}) {
+export default function DetailEvent({id, title, path, date, place, author, entryType, description, label, ...rest}) {
 
-    //const baseUrl = window.location.origin;
-    //const eventUrl = `${baseUrl}${path}`;
+    const baseUrl = window.location.origin;
+    const eventUrl = `${baseUrl}/event/${id}`;
 
     const handleSubscribe = () => {
         // Lógica para manejar la suscripción del usuario
@@ -9,11 +9,17 @@ export default function DetailEvent({title, path, date, place, author, entryType
         alert(`Te has suscrito al evento: ${title}`);
     };
 
-    const urlsCompartir = {
-        whatsapp: `https://wa.me/?text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        telegram:`https://t.me/share/url?url=&text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        gmail:`mailto:?subject=Evento: ${title}&body=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        };
+const urlsCompartir = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: ${eventUrl}`
+    )}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(eventUrl)}&text=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}.`
+    )}`,
+    gmail: `mailto:?subject=${encodeURIComponent(`Evento: ${title}`)}&body=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: ${eventUrl}`
+    )}`,
+};
 
     return(<>
     <div className="flex flex-col lg:flex-row min-h-screen p-6 space-y-6 lg:space-y-0 lg:space-x-6 bg-gray-50">

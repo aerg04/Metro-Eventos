@@ -26,5 +26,6 @@ export default function DetailEventController() {
     }
     return <DetailEvent 
                 {...event}
+                id={id}
     />;
 }

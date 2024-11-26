@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import EventCom from "../components/EventCom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 export default function SavedEvents({ onClick, loading, events }) {
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const eventDates = events.map(event => new Date(event.date));
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
+   const eventDates = events.map(event => new Date(event.date));
 
     return(
     <>
@@ -22,15 +17,12 @@ export default function SavedEvents({ onClick, loading, events }) {
                 <div className="bg-white shadow-md rounded-md p-4">
                     <h2 className="font-bold text-lg mb-4">Calendario de eventos</h2>
                     <Calendar
-                        onChange={handleDateChange}
-                        value={selectedDate}
-                            tileClassName={({ date, view }) => {
+                        value={new Date()}
+                        tileClassName={({ date }) => {
 
                             const defaultClass = 'bg-gray-200 text-gray-600';
 
-                            const isEventDate = eventDates.some(
-                                (d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]
-                            );
+                            const isEventDate = eventDates.some(d => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]);
 
                             const isWeekend = [0, 6].includes(date.getDay());
 

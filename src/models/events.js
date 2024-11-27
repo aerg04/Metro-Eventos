@@ -23,6 +23,25 @@ export async function getEvents() {
     }
 }
 
+export async function getEventsByIds(ids) {
+    try {
+        if (!Array.isArray(ids)) {
+            console.error("El parámetro 'ids' no es un arreglo:", ids);
+            throw new TypeError("El parámetro 'ids' debe ser un arreglo de strings");
+        }
+
+        const response = await axiosInstance.get('/events?page=1&size=20');
+        const fetchedEvents = response.data;
+
+        const filteredEvents = fetchedEvents.filter((event) => ids.includes(event.id));
+
+        return filteredEvents;
+    } catch (error) {
+        console.error('Failed to fetch events by IDs:', error);
+        return [];
+    }
+}
+
 export async function editEvent(event,id) {
     try {
         const response = await axiosInstance.put(`/events/${id}`, event);

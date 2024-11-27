@@ -1,13 +1,35 @@
-export default function DetailEvent({title, path, date, place, author, entryType, description, label, ...rest}) {
+import React, { useState } from 'react';
+import { subscribeToEvent } from '../models/user';
+import PopUpConfirmation from './PopUpConfirmation';
 
-    //const baseUrl = window.location.origin;
-    //const eventUrl = `${baseUrl}${path}`;
+export default function DetailEvent({id, title, path, date, place, author, entryType, description, label, ...rest}) {
+    const [isSubscribed, setIsSubscribed] = useState(false);  // Estado para manejar si el usuario ya está suscrito
+    const [loading, setLoading] = useState(false);
 
-    const urlsCompartir = {
-        whatsapp: `https://wa.me/?text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        telegram:`https://t.me/share/url?url=&text=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        gmail:`mailto:?subject=Evento: ${title}&body=Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: enlace`,
-        };
+    const baseUrl = window.location.origin;
+    const eventUrl = `${baseUrl}/event/${id}`;
+
+const handleSubscribe = async () => {
+    try {
+        const response = await subscribeToEvent(id); // Pasa el `id` del evento
+        //alert(`Te has suscrito al evento: ${title}`);
+    } catch (error) {
+        console.log("Error al suscribir");
+        //alert('No se pudo suscribir al evento');
+    }
+};
+
+const urlsCompartir = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: ${eventUrl}`
+    )}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(eventUrl)}&text=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}.`
+    )}`,
+    gmail: `mailto:?subject=${encodeURIComponent(`Evento: ${title}`)}&body=${encodeURIComponent(
+        `Asiste al siguiente evento: ${title} en ${place} el ${date}. Más información aquí: ${eventUrl}`
+    )}`,
+};
 
     return(<>
     <div className="flex flex-col lg:flex-row min-h-screen p-6 space-y-6 lg:space-y-0 lg:space-x-6 bg-gray-50">
@@ -26,7 +48,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
 
 
                 <div className="flex flex-col bg-white shadow-md p-6 rounded-lg w-full lg:w-2/3">
-                    <div className="mb-6">
+                    <div className="mb-6 mt-6">
                         <h1 className="text-2xl text-center font-semibold">Descripción</h1>
                         <div className="mt-4 bg-gray-100 p-4 rounded-lg shadow-inner">
                             <p className="text-xl text-gray-700">{description}</p>
@@ -49,7 +71,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
                         ))}
                         </div>
                     </div> */}
-                    <div className="mb-6">
+                    <div className="mb-6 mt-20">
                         <h2 className="text-center text-xl font-semibold">Etiquetas</h2>
                         <div className="mt-4 flex flex-wrap gap-2 justify-center bg-gray-100 p-2 rounded">
                             {label && label.length > 0 ? (
@@ -62,7 +84,7 @@ export default function DetailEvent({title, path, date, place, author, entryType
                         </div>
                         </div>
 
-                        <div className="mb-6">
+                        <div className="mb-6 mt-20">
                             <h2 className="text-center text-xl font-semibold">Compartir este evento</h2>
                         <div className="flex justify-center mt-6 space-x-6">
                                 <a href={urlsCompartir.whatsapp} target="_blank" rel="noopener noreferrer"
@@ -95,6 +117,13 @@ export default function DetailEvent({title, path, date, place, author, entryType
                               />
                            </a>
 
+                        </div>
+                        <div className="flex justify-center mt-20">
+                            <PopUpConfirmation
+                                messageButton={isSubscribed ? 'Ya estás suscrito' : loading ? 'Cargando...' : 'Suscribirse'}
+                                message="¿Estás seguro de que deseas suscribirte a este evento?"
+                                onConfirm={handleSubscribe}
+                            />
                         </div>
                     </div>
                 </div>

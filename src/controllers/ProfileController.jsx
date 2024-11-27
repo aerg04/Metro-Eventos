@@ -11,7 +11,7 @@ const ProfileController = () => {
 
     const handleUpdateUser = async (updatedData) => {
         try {
-            const { email } = getUserInfo();
+            const { email } = user; // Obtén el email directamente del contexto
             const response = await axiosInstance.put(`/users/${email}`, updatedData);
             if (response.status === 200) {
                 updateUserData(response.data);
@@ -27,4 +27,5 @@ const ProfileController = () => {
 
     return <Profile userData={user} handleUpdateUser={handleUpdateUser} />;
 };
+
 export default ProfileController;

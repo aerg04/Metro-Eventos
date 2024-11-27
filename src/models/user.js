@@ -80,10 +80,10 @@ export const getSavedEvents = async (email) => {
 
 export const register = async (data) => {
     try {
-        const exist = await axiosInstance.get(`/users/${email}`, data);
-        if(exist.data.length > 0){
-            throw new Error('Email already exists');
-        }
+        // const exist = await axiosInstance.get(`/users/${data.mail}`, data);
+        // if(exist.data.length > 0){
+        //     throw new Error('Email already exists');
+        // }
         const response = await axiosInstance.post('/auth/signup', data);
         return response.data;
     } catch (error) {
@@ -117,12 +117,30 @@ export const getUserProfile = async (email) => {
 
 };
 
-export const getUserEvents = async (email) => {
-    try {
-        const response = await axiosInstance.get(`/users/${email}/getSubscriptions`);
+export async function getUserBookmarks() {
+    try{
+        const email = localStorage.getItem('email');
+        const response = await axiosInstance.get(`/users/${email}`);
+        // console.log(response.data.bookmarks);
         return response.data;
-    } catch (error) {
-        console.error('Error al obtener eventos guardados:', error);
-        throw error;
+
+    }catch(error){
+        console.error('Error al obtener los bookmarks del usuario:', error);
+   
     }
-};
+
+}
+
+export async function updateBookmark(user) {
+    try{
+        console.log(user);
+        const email = localStorage.getItem('email');
+        const response = await axiosInstance.put(`/users/${email}`,user);
+        return response.data;
+
+    }catch(error){
+        console.error('Error al agregar el bookmark:', error);
+        
+    }
+
+}

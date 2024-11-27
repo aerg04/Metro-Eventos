@@ -1,10 +1,32 @@
-export default function EventCom({id, title, path, date, place, author, entryType, handleClick}) {
+import { useState,useEffect } from 'react';
+
+export default function EventCom({id, title, path, date, place, author, entryType, handleClick, bookmarkState=false, showBookmark=true, handleBookmark={}}) {
+    const [bookmarked, setBookmarked] = useState(false);
+    
+    useEffect(() => {setBookmarked(bookmarkState)}, [bookmarkState]);
+
+    const handleBookmarkClick = (e) => {
+        e.stopPropagation();
+        setBookmarked(!bookmarked);
+        handleBookmark(id);
+    };
+
     return (
         <>
             <div onClick={() => handleClick(id)} className="bg-gray-100 w-64 m-2 h-[414px] rounded-xl cursor-pointer">
-                <div className="w-64 h-64">
+                <div className="w-64 h-64 relative">
                     <img className="w-full h-full object-cover rounded-t-lg" src={path} alt="" />
-
+                    {showBookmark && ( <div className="absolute bottom-2 right-2" onClick={handleBookmarkClick}>
+                        {bookmarked ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5v14l7-7 7 7V5z"/>
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5v14l7-7 7 7V5z"/>
+                            </svg>
+                        )}
+                    </div>)}
                 </div>
                 <div className="h-14 w-full">
                     <p className="px-4 pt-1 font-bold text-md line-clamp-2">{title}</p>

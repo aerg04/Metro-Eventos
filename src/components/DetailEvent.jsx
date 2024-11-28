@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
-import { subscribeToEvent } from '../models/user';
-import PopUpConfirmation from './PopUpConfirmation';
 
 export default function DetailEvent({id, title, path, date, place, author, entryType, description, label, ...rest}) {
-    const [isSubscribed, setIsSubscribed] = useState(false);  // Estado para manejar si el usuario ya está suscrito
-    const [loading, setLoading] = useState(false);
-
     const baseUrl = window.location.origin;
     const eventUrl = `${baseUrl}/event/${id}`;
 
-const handleSubscribe = async () => {
-    try {
-        const response = await subscribeToEvent(id); // Pasa el `id` del evento
-        //alert(`Te has suscrito al evento: ${title}`);
-    } catch (error) {
-        console.log("Error al suscribir");
-        //alert('No se pudo suscribir al evento');
-    }
-};
 
 const urlsCompartir = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(
@@ -118,13 +104,13 @@ const urlsCompartir = {
                            </a>
 
                         </div>
-                        <div className="flex justify-center mt-20">
+                        {/* <div className="flex justify-center mt-20">
                             <PopUpConfirmation
                                 messageButton={isSubscribed ? 'Ya estás suscrito' : loading ? 'Cargando...' : 'Suscribirse'}
                                 message="¿Estás seguro de que deseas suscribirte a este evento?"
                                 onConfirm={handleSubscribe}
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

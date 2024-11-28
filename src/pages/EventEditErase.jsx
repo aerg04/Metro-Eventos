@@ -202,8 +202,7 @@ function EventCreator({ handleEdit, handleDelete, form = {}, pageTitle = "Editar
                         <PopUpConfirmation
                             messageButton="Eliminar Evento"
                             message="¿Estás seguro de que deseas eliminar este evento?"
-                            onConfirm={() => {if (validateForm()) handleDelete(formData.id);
-                                }}
+                            onConfirm={() => {handleDelete(formData.id); }}
                         />
                     </div>
                 </div>

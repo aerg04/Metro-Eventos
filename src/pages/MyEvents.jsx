@@ -2,11 +2,11 @@ import EventCom from "../components/EventCom";
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function MyEvents({onClick,loading ,events}) {
     const [selectedDate, setSelectedDate] = useState(new Date());
-
+    
     const eventDates = events.map(event => new Date(event.date));
 
     const handleDateChange = (date) => {
@@ -31,21 +31,21 @@ export default function MyEvents({onClick,loading ,events}) {
                     <Calendar
                         onChange={handleDateChange}
                         value={selectedDate}
-                            tileClassName={({ date, view }) => {
+                        tileClassName={({ date, view }) => {
 
-                            const defaultClass = 'bg-gray-200 text-gray-600';
+                        const defaultClass = 'bg-gray-200 text-gray-600';
 
-                            const isEventDate = eventDates.some(
-                                (d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]
-                            );
+                        const isEventDate = eventDates.some(
+                            (d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]
+                        );
 
-                            const isWeekend = [0, 6].includes(date.getDay());
+                        const isWeekend = [0, 6].includes(date.getDay());
 
-                            if (isEventDate) return "react-calendar__tile--hasEvent";
-                            if (isWeekend) return "react-calendar__tile--weekend";
+                        if (isEventDate) return "react-calendar__tile--hasEvent";
+                        if (isWeekend) return "react-calendar__tile--weekend";
 
-              return "defaultClass";
-            }}
+                        return "defaultClass";
+                }}
             className="compact-calendar"
                     />
                 </div>

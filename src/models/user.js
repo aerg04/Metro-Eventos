@@ -85,6 +85,7 @@ export const register = async (data) => {
         //     throw new Error('Email already exists');
         // }
         const response = await axiosInstance.post('/auth/signup', data);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         throw new Error('Registration failed');

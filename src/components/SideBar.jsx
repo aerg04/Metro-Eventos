@@ -11,7 +11,7 @@ function SideBar({ is_open, role }) {
                     Menu
                 </div>
                 <ul className="flex flex-col p-2 space-y-1">
-                    <li className="hover:bg-neutral-100 p-2 rounded">
+                    {/* <li className="hover:bg-neutral-100 p-2 rounded">
                         <NavLink 
                             to="/profile" 
                             className={({ isActive }) => 
@@ -25,7 +25,7 @@ function SideBar({ is_open, role }) {
                                 Perfil
                             </div>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li className="hover:bg-neutral-100 p-2 rounded">
                         <NavLink 
                             to="/events" 
@@ -41,7 +41,7 @@ function SideBar({ is_open, role }) {
                             </div>
                         </NavLink>
                     </li>
-                    <li className="hover:bg-neutral-100 p-2 rounded">
+                    {/* <li className="hover:bg-neutral-100 p-2 rounded">
                         <NavLink
                             to="/savedEvents"
                             className={({ isActive }) =>
@@ -55,7 +55,7 @@ function SideBar({ is_open, role }) {
                                 Eventos Guardados
                             </div>
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     {role === 'ROLE_CREADOR' && (
                         <li className="hover:bg-neutral-100 p-2 rounded">

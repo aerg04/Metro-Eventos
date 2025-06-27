@@ -1,19 +1,15 @@
-// import Navbar from "../components/navigation/Navbar";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import "../index.css";
 import { useState } from "react";
 
-function Register() {
+function Register({onSubmit}) {
   const [errors, setErrors] = useState({});
 
   const funcCreate = async (e) => {
     e.preventDefault();
 
-    const rol = "Cliente";
-    const fname = e.target.Fname.value.trim();
-    const lname = e.target.Lname.value.trim();
-    const phone = e.target.phone.value.trim();
+    const role = "ROLE_REGULAR"; //Queda pendiente que pueda ser ROLE_REGULAR o ROLE_ADMIN, y eso diferencia al que puede crear eventos y al queno
+    const name = e.target.Fname.value.trim();
+    const lastName = e.target.Lname.value.trim();
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
     const checkpassword = e.target.checkpassword.value.trim();
@@ -21,24 +17,20 @@ function Register() {
     const newErrors = {};
 
     const nameRegex = /^[A-Za-z]+$/;
-    const emailRegex = /^[^\s@]+@correo\.unimet\.edu\.ve$/; // Solo acepta correos de la unimet
-    const phoneRegex = /^[0-9]+$/;
+    // const emailRegex = /^[^\s@]+@correo\.unimet\.edu\.ve$/; // Solo acepta correos de la unimet
+    // const phoneRegex = /^[0-9]+$/;
 
     // Validaciones de campos
-    if (!fname || !nameRegex.test(fname)) {
-      newErrors.fname = "Nombre inválido o vacío";
+    if (!name || !nameRegex.test(name)) {
+      newErrors.name = "Nombre inválido o vacío";
     }
 
-    if (!lname || !nameRegex.test(lname)) {
-      newErrors.lname = "Apellido inválido o vacío";
+    if (!lastName || !nameRegex.test(lastName)) {
+      newErrors.lastName = "Apellido inválido o vacío";
     }
 
-    if (!email || !emailRegex.test(email)) {
-      newErrors.email = "Correo electrónico debe ser @correo.unimet.edu.ve";
-    }
-
-    if (!phone || !phoneRegex.test(phone)) {
-      newErrors.phone = "Número de teléfono inválido o vacío";
+    if (!email) {
+      newErrors.email = "Correo electrónico invalido";
     }
 
     if (!password) {
@@ -53,36 +45,17 @@ function Register() {
       setErrors(newErrors);
       return;
     }
-
-    // Si no hay errores, procede a crear el usuario
-  //   try {
-  //     const infoUsuario = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     ).then((usuarioFirebase) => {
-  //       return usuarioFirebase;
-  //     });
-  //     const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-  //     setDoc(docuRef, {
-  //       email: email,
-  //       rol: rol,
-  //       fname: fname,
-  //       lname: lname,
-  //       phone: phone,
-  //     });
-  //     console.log(infoUsuario);
-  //   } catch (error) {
-  //     alert("Este Correo ya se encuentra registrado");
-  //   }
-
-
-    };
+    //si todo esta bien procede con onSubmit
+    try {
+      await onSubmit({role, name, lastName, email, password});
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   return (
     <>
-      <Header></Header>
-      <div className="flex place-content-evenly flex-col items-center gap-4 w-full h-full bg-gradient-circle lg:p-4">
+      <div className="min-h-screen flex place-content-evenly flex-col items-center gap-4 w-full h-full lg:p-4">
         <h2 className="text-center text-4xl mt-4 uppercase tracking-widest">
           Regístrate
         </h2>
@@ -99,12 +72,12 @@ function Register() {
                 <input
                   id="Fname"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.fname ? "border-red-500" : "border-zinc-300"
+                    errors.name ? "border-red-500" : "border-zinc-300"
                   }`}
                   placeholder="Enter your first name"
                 />
-                {errors.fname && (
-                  <p className="text-red-500 text-xs mt-1">{errors.fname}</p>
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                 )}
               </div>
               <div>
@@ -115,28 +88,14 @@ function Register() {
                   id="Lname"
                   placeholder="Enter your last name"
                   className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.lname ? "border-red-500" : "border-zinc-300"
+                    errors.lastName ? "border-red-500" : "border-zinc-300"
                   }`}
                 />
-                {errors.lname && (
-                  <p className="text-red-500 text-xs mt-1">{errors.lname}</p>
+                {errors.lastName && (
+                  <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-bold text-zinc-700">
-                  Teléfono
-                </label>
-                <input
-                  id="phone"
-                  className={`mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 ${
-                    errors.phone ? "border-red-500" : "border-zinc-300"
-                  }`}
-                  placeholder="Enter your phone number"
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                )}
-              </div>
+              
               <div>
                 <label className="block text-sm font-bold text-zinc-700">
                   Correo
@@ -192,7 +151,6 @@ function Register() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }
